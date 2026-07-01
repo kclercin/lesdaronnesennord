@@ -1,3 +1,300 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* =========================================================
+   Les Daronnes en Nord — design system global styles
+   Palette : crème #FBF6E9 · encre #1B1A17 · or #C9A227/#E8BE36/#D8B43A
+   Fonts   : Anton (display) · Caveat (manuscrit) · Poppins (texte)
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #fbf6e9;
+  color: #1b1a17;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ---------- animations ---------- */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--r, 0deg));
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+@keyframes rc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rc-rise {
+  animation: rc-rise 0.7s ease both;
+}
+
+/* ---------- boutons (pilules) ---------- */
+.dc-btn {
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  border-radius: 44px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+.dc-btn:active {
+  transform: scale(0.95);
+}
+.dc-btn-dark {
+  background: #1b1a17;
+  color: #fbf6e9;
+}
+.dc-btn-dark:hover {
+  background: #332f1f;
+}
+.dc-btn-outline {
+  background: transparent;
+  color: #1b1a17;
+  border: 2px solid #1b1a17;
+}
+.dc-btn-outline-gold:hover {
+  background: #c9a227;
+  border-color: #c9a227;
+}
+.dc-btn-outline-fill:hover {
+  background: #1b1a17;
+  color: #fbf6e9;
+}
+.dc-btn-gold {
+  background: #c9a227;
+  color: #1b1a17;
+}
+.dc-btn-gold:hover {
+  background: #1b1a17;
+  color: #fbf6e9;
+}
+.dc-btn-gold-bright {
+  background: #c9a227;
+  color: #1b1a17;
+}
+.dc-btn-gold-bright:hover {
+  background: #e8be36;
+}
+.dc-btn-ghost-light {
+  background: transparent;
+  color: #fbf6e9;
+  border: 2px solid rgba(251, 246, 233, 0.5);
+}
+.dc-btn-ghost-light:hover {
+  background: rgba(251, 246, 233, 0.08);
+  border-color: #fbf6e9;
+}
+
+/* ---------- effets de survol sur cartes / liens ---------- */
+.dc-lift {
+  transition: transform 0.2s ease;
+}
+.dc-lift:hover {
+  transform: translateY(-6px);
+}
+.dc-lift-sm {
+  transition: transform 0.2s ease;
+}
+.dc-lift-sm:hover {
+  transform: translateY(-4px);
+}
+.dc-lift-sm:active {
+  transform: scale(0.98);
+}
+
+/* ---------- flèches carrousel ---------- */
+.dc-arrow {
+  width: 50px;
+  height: 50px;
+  flex: none;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #1b1a17;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.dc-arrow:active {
+  transform: scale(0.92);
+}
+.dc-arrow-light {
+  background: #fbf6e9;
+  color: #1b1a17;
+}
+.dc-arrow-light:hover {
+  background: #1b1a17;
+  color: #fbf6e9;
+}
+.dc-arrow-dark {
+  background: #1b1a17;
+  color: #fbf6e9;
+}
+.dc-arrow-dark:hover {
+  background: #332f1f;
+}
+
+/* ---------- champs de formulaire ---------- */
+.rc-inp {
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  color: #1b1a17;
+  background: #ffffff;
+  border: 2px solid #1b1a17;
+  border-radius: 14px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.rc-inp:focus {
+  border-color: #c9a227;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
+}
+.rc-inp::placeholder {
+  color: #9c978a;
+}
+
+/* ---------- liens de navigation ---------- */
+.dc-nav-link {
+  text-decoration: none;
+  color: #1b1a17;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.15s ease;
+}
+.dc-nav-link:hover {
+  color: #b8911e;
+}
+
+/* ---------- menu mobile (adaptation responsive) ---------- */
+.dc-burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 2px solid #1b1a17;
+  border-radius: 14px;
+  background: transparent;
+  color: #1b1a17;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.dc-burger:hover {
+  background: #1b1a17;
+  color: #fbf6e9;
+}
+.dc-mobile-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fbf6e9;
+  border-bottom: 1px solid rgba(27, 26, 23, 0.12);
+  box-shadow: 0 18px 30px -22px rgba(27, 26, 23, 0.6);
+  display: flex;
+  flex-direction: column;
+  padding: 10px clamp(20px, 5vw, 56px) 20px;
+  gap: 2px;
+}
+.dc-mobile-link {
+  text-decoration: none;
+  color: #1b1a17;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(27, 26, 23, 0.08);
+}
+.dc-mobile-link:last-child {
+  border-bottom: none;
+}
+.dc-mobile-link.is-active {
+  color: #b8911e;
+}
+
+/* =========================================================
+   Responsive — bascule à 860px (repris du design d'origine)
+   ========================================================= */
+@media (max-width: 860px) {
+  .rc-nav-links {
+    display: none !important;
+  }
+  .dc-burger {
+    display: inline-flex;
+  }
+  .rc-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .rc-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .rc-3 {
+    grid-template-columns: 1fr !important;
+  }
+  .rc-4 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .rc-circles {
+    grid-template-columns: 1fr !important;
+  }
+  .rc-form-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .rc-foot-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .rc-h1 {
+    font-size: 44px !important;
+  }
+  .rc-htitle {
+    font-size: 64px !important;
+  }
+  .rc-htitle-lg {
+    font-size: 72px !important;
+  }
+}
+
+/* Cartes d'atelier : sur mobile, on empile image + texte proprement */
+@media (max-width: 860px) {
+  .rc-atelier-media {
+    min-height: 240px !important;
+  }
+}
