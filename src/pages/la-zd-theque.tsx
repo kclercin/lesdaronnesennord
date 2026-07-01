@@ -11,25 +11,24 @@ import {
 } from "../components/doodles"
 import sessionsData from "../data/sessions.json"
 
-/* Les prochaines sessions sont éditables dans src/data/sessions.json
-   (rebuild nécessaire ensuite). Champs : day, month, place, city.
-   `subject` est optionnel : s'il est absent, l'objet du mail est dérivé de la date + ville. */
+/* Les prochaines sessions sont éditables dans src/data/sessions.json (rebuild ensuite).
+   - bookingUrl : page de réservation externe utilisée par défaut (ouverte dans un nouvel onglet).
+   - sessions[].url : optionnel, pour qu'une session pointe vers sa propre page de réservation.
+   Champs affichés : day, month, place, city. */
 type Session = {
   day: string
   month: string
   place: string
   city: string
-  subject?: string
+  url?: string
 }
 
-const SESSIONS: Session[] = sessionsData
+const { bookingUrl, sessions: SESSIONS } = sessionsData as {
+  bookingUrl: string
+  sessions: Session[]
+}
 
-const sessionSubject = (s: Session) =>
-  s.subject || `${s.day} ${s.month} (${s.city})`
-
-const mailtoFor = (s: Session) =>
-  "mailto:contact@lesdaronnesennord.fr?subject=" +
-  encodeURIComponent("Réservation atelier — " + sessionSubject(s))
+const bookingHref = (s: Session) => s.url || bookingUrl
 
 const propose = [
   { icon: <IconCosmetic />, title: "Apprendre", text: "Des ateliers pratiques pour fabriquer vos produits du quotidien.", radius: "240px 18px 220px 18px / 18px 220px 18px 240px" },
@@ -155,7 +154,7 @@ const ZdThequePage = () => {
                   <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{s.place}</h3>
                   <p style={{ margin: "4px 0 0", fontSize: 14.5, color: "#6B675C" }}>{s.city}</p>
                   <p style={{ margin: "14px 0 18px", fontSize: 14, color: "#4A463C" }}>Mercredi, à partir de 14h.</p>
-                  <a href={mailtoFor(s)} className="dc-btn dc-btn-gold" style={{ marginTop: "auto", textAlign: "center", fontWeight: 700, fontSize: 15, padding: "12px 18px", borderRadius: 40 }}>
+                  <a href={bookingHref(s)} target="_blank" rel="noopener noreferrer" className="dc-btn dc-btn-gold" style={{ marginTop: "auto", textAlign: "center", fontWeight: 700, fontSize: 15, padding: "12px 18px", borderRadius: 40 }}>
                     Réserver ma place
                   </a>
                 </div>
