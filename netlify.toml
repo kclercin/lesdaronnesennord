@@ -2,16 +2,16 @@
   command = "npm run build"
   publish = "public"
 
-# Redirection canonique : apex -> www (Netlify la fait aussi automatiquement
+# Redirection canonique : www -> apex (Netlify la fait aussi automatiquement
 # via le "primary domain", ces règles servent de garantie explicite)
 [[redirects]]
-  from = "https://lesdaronnesennord.fr/*"
-  to = "https://www.lesdaronnesennord.fr/:splat"
+  from = "https://www.lesdaronnesennord.fr/*"
+  to = "https://lesdaronnesennord.fr/:splat"
   status = 301
   force = true
 
 [[redirects]]
-  from = "http://lesdaronnesennord.fr/*"
-  to = "https://www.lesdaronnesennord.fr/:splat"
+  from = "http://www.lesdaronnesennord.fr/*"
+  to = "https://lesdaronnesennord.fr/:splat"
   status = 301
   force = true

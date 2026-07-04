@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.lesdaronnesennord.fr/sitemap-index.xml
+Sitemap: https://lesdaronnesennord.fr/sitemap-index.xml

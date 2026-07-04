@@ -123,8 +123,8 @@ const ContactPage = () => {
               <a href="mailto:contact@lesdaronnesennord.fr" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#FBF6E9", fontSize: 15, padding: "8px 0" }}>
                 <IconMailLine /> contact@lesdaronnesennord.fr
               </a>
-              <a href="https://www.lesdaronnesennord.fr" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#FBF6E9", fontSize: 15, padding: "8px 0" }}>
-                <IconGlobe /> www.lesdaronnesennord.fr
+              <a href="https://lesdaronnesennord.fr" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#FBF6E9", fontSize: 15, padding: "8px 0" }}>
+                <IconGlobe /> lesdaronnesennord.fr
               </a>
               <div style={{ display: "flex", alignItems: "center", gap: 12, color: "rgba(251,246,233,.82)", fontSize: 15, padding: "8px 0" }}>
                 <IconPin /> Métropole lilloise · Nord (59)
