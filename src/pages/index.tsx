@@ -31,10 +31,10 @@ const IndexPage = () => {
           overflow: "hidden",
         }}
       >
-        <div style={{ position: "absolute", left: "6%", top: "22%", transform: "rotate(-8deg)", opacity: 0.9 }}>
+        <div className="rc-hero-deco" style={{ position: "absolute", left: "6%", top: "22%", transform: "rotate(-8deg)", opacity: 0.9 }}>
           <Bottles scale={0.7} />
         </div>
-        <div style={{ position: "absolute", right: "5%", bottom: "14%", transform: "rotate(6deg)" }}>
+        <div className="rc-hero-deco" style={{ position: "absolute", right: "5%", bottom: "14%", transform: "rotate(6deg)" }}>
           <Plant />
         </div>
         <div

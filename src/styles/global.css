@@ -254,6 +254,11 @@ img {
    Responsive — bascule à 860px (repris du design d'origine)
    ========================================================= */
 @media (max-width: 860px) {
+  /* décorations flottantes du hero accueil : masquées sur mobile/tablette
+     car elles chevauchent le texte centré une fois la largeur réduite */
+  .rc-hero-deco {
+    display: none !important;
+  }
   .rc-nav-links {
     display: none !important;
   }
