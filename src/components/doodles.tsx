@@ -1,4 +1,5 @@
 import * as React from "react"
+import logoDaronnes from "../images/logo-daronnes.png"
 
 /* Doodles & icônes dessinés à la main — repris fidèlement du projet Claude Design.
    Tous les tracés/viewBox sont conservés à l'identique. */
@@ -316,55 +317,13 @@ export const IconPin = ({ size = 22 }: { size?: number }) => (
 )
 
 /* ---------- logo de marque ---------- */
-/* Recréé en SVG : le PNG source du projet dépassait la limite de récupération (256 KiB).
-   Motif fidèle à l'univers de la marque (double-cercle + étoile + wordmark Anton/Caveat).
-   Monochrome pour s'inverser proprement (encre en header, crème en footer). */
-export const Logo = ({
-  height = 54,
-  color = INK,
-}: {
-  height?: number
-  color?: string
-}) => (
-  <svg
-    height={height}
-    viewBox="0 0 316 96"
-    role="img"
-    aria-label="Les Daronnes en Nord"
-    style={{ display: "block", width: "auto" }}
-  >
-    <circle cx={46} cy={48} r={38} {...s(2.6, color)} />
-    <circle cx={46} cy={48} r={31} {...s(1.4, color)} />
-    <circle cx={46} cy={9} r={2.4} fill={color} />
-    <circle cx={46} cy={87} r={2.4} fill={color} />
-    <g transform="translate(30 32) scale(1.35)">
-      <path
-        d="M2.6 8.2 6.7 11.6 12 3.8 17.3 11.6 21.4 8.2 19.6 19.4 4.4 19.4 2.6 8.2Z"
-        fill={color}
-      />
-      <circle cx={2.6} cy={7} r={1.5} fill={color} />
-      <circle cx={12} cy={2.4} r={1.5} fill={color} />
-      <circle cx={21.4} cy={7} r={1.5} fill={color} />
-    </g>
-    <text
-      x={98}
-      y={45}
-      fontFamily="'Anton', sans-serif"
-      fontSize={31}
-      fill={color}
-      letterSpacing="0.5px"
-    >
-      LES DARONNES
-    </text>
-    <text
-      x={100}
-      y={82}
-      fontFamily="'Caveat', cursive"
-      fontWeight={700}
-      fontSize={34}
-      fill={color}
-    >
-      en Nord
-    </text>
-  </svg>
+/* Logo officiel (PNG transparent, noir + doré). Carré : à hauteur égale il est plus
+   compact que l'ancien wordmark. Sur fond sombre, l'envelopper dans un fond clair
+   (cf. SiteFooter) car les tracés noirs ne ressortent pas. */
+export const Logo = ({ height = 54 }: { height?: number }) => (
+  <img
+    src={logoDaronnes}
+    alt="Les Daronnes en Nord"
+    style={{ display: "block", height, width: "auto" }}
+  />
 )

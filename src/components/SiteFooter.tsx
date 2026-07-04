@@ -52,7 +52,9 @@ const SiteFooter = () => {
         }}
       >
         <div>
-          <Logo height={84} color="#FBF6E9" />
+          <span style={{ display: "inline-block", background: "#FBF6E9", padding: "14px 20px", borderRadius: 20 }}>
+            <Logo height={92} />
+          </span>
           <p
             style={{
               margin: "16px 0 0",
