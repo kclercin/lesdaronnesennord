@@ -93,18 +93,29 @@ export const LogoCircle = ({
     />
     <circle cx={110} cy={17} r={2.4} fill={color} />
     <circle cx={110} cy={203} r={2.4} fill={color} />
-    <text
-      x={110}
-      y={118}
-      textAnchor="middle"
-      fontFamily="'Caveat', cursive"
-      fontWeight={700}
-      fontSize={fontSize}
-      fill={color}
-      letterSpacing="1px"
-    >
-      {label}
-    </text>
+    {(() => {
+      const lines = label.split("\n")
+      const lineHeight = fontSize * 1.02
+      const startY = 118 - ((lines.length - 1) * lineHeight) / 2
+      return (
+        <text
+          x={110}
+          y={startY}
+          textAnchor="middle"
+          fontFamily="'Caveat', cursive"
+          fontWeight={700}
+          fontSize={fontSize}
+          fill={color}
+          letterSpacing="1px"
+        >
+          {lines.map((line, i) => (
+            <tspan key={i} x={110} dy={i === 0 ? 0 : lineHeight}>
+              {line}
+            </tspan>
+          ))}
+        </text>
+      )
+    })()}
   </svg>
 )
 

@@ -82,8 +82,7 @@ const IndexPage = () => {
           </h1>
           <p style={{ margin: "24px auto 0", maxWidth: "36em", fontSize: 19, lineHeight: 1.65, color: "#4A463C" }}>
             Ateliers de cosmétiques maison et zéro déchet à Lille et dans la métropole, animés par{" "}
-            <strong>Les Daronnes en Nord</strong>. On touche les matières, on formule, on rit.{" "}
-            <em>Zéro écran, 100&nbsp;% humain.</em>
+            <strong>Les Daronnes en Nord</strong>. On touche les matières, on formule, on rit.
           </p>
           <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginTop: 32 }}>
             <a href="/la-zd-theque" className={`${btnBase} dc-btn-dark`} style={{ fontSize: 16, padding: "15px 28px" }}>
@@ -144,7 +143,7 @@ const IndexPage = () => {
             {[
               { href: "/la-zd-theque", label: "La ZD'thèque", fs: 26, txt: "Sessions gratuites zéro déchet & cosmétiques maison" },
               { href: "/le-lab", label: "Le LAB", fs: 30, txt: "Accompagnement des artisans & créateurs" },
-              { href: "/nos-ateliers", label: "Les Ateliers", fs: 25, txt: "Les recettes & savoir-faire qu'on y fabrique" },
+              { href: "/nos-ateliers", label: "Les Ateliers\nd'Artisans", fs: 24, txt: "Les recettes & savoir-faire qu'on y fabrique" },
             ].map(c => (
               <a
                 key={c.label}
@@ -227,7 +226,7 @@ const IndexPage = () => {
                 On retient 10&nbsp;% de ce qu'on lit, mais 90&nbsp;% de ce que l'on fait. Place à l'expérience concrète, sensorielle et humaine.
               </p>
               <p style={{ margin: "10px 0 0", fontSize: 15.5, lineHeight: 1.6, color: "#4A463C" }}>
-                <strong>Zéro écran, 100&nbsp;% humain —</strong> nos ateliers sont des bulles de déconnexion numérique, ancrées au cœur de notre région.
+                Nos ateliers sont des bulles de déconnexion numérique, ancrées au cœur de notre région.
               </p>
             </article>
           </div>
@@ -367,7 +366,7 @@ const IndexPage = () => {
               Nous transformons de grands enjeux écologiques en gestes simples, ludiques et conviviaux. Le passage à l'action n'est pas une contrainte, mais une occasion de mieux consommer, de faire des économies et de redécouvrir le plaisir du « faire soi-même ».
             </p>
             <p style={{ margin: "14px 0 0", fontSize: 17, lineHeight: 1.7, color: "#4A463C" }}>
-              Nos rendez-vous sont <strong>gratuits, anonymes et sans jugement</strong> — à Lille, Villeneuve-d'Ascq, Lys-lez-Lannoy et partout dans la métropole. Certains ateliers sont menés avec l'<strong>Association La Cloche</strong>.
+              Nos rendez-vous sont <strong>anonymes et sans jugement</strong> — à Lille, Villeneuve-d'Ascq, Lys-lez-Lannoy et partout dans la métropole.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24 }}>
               {["Apprendre", "Partager", "Agir"].map(t => (
@@ -412,10 +411,10 @@ const IndexPage = () => {
             <Sparkle size={34} color="#1B1A17" />
           </div>
           <h2 style={{ margin: 0, fontFamily: "'Caveat',cursive", fontSize: "clamp(40px,5.5vw,66px)", lineHeight: 1, color: "#1B1A17" }}>
-            Prêt(e) à mettre la main à la pâte ?
+            Venez pas les mains vides !
           </h2>
-          <p style={{ margin: "12px auto 0", maxWidth: "40ch", fontSize: 17, lineHeight: 1.6, color: "#4a3c10" }}>
-            Réservez votre créneau, venez les mains vides et repartez avec vos premières recettes. Votre avis ne prend que 2 minutes.
+          <p style={{ margin: "12px auto 0", maxWidth: "50ch", fontSize: 17, lineHeight: 1.6, color: "#4a3c10" }}>
+            Alimentez notre ZD'thèque avec vos petits trésors du quotidien comme des bocaux, des boîtes d'œufs, tissus en coton, tee-shirts, linge de maison, des journaux…
           </p>
           <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginTop: 28 }}>
             <a href="/la-zd-theque#sessions" className="dc-btn dc-btn-dark" style={{ fontSize: 16, padding: "15px 30px" }}>

@@ -86,7 +86,7 @@ const ZdThequePage = () => {
             <p style={{ margin: "18px 0 0", fontSize: 17, lineHeight: 1.7, color: "#4A463C", maxWidth: "46ch" }}>
               Bienvenue dans notre ZD'thèque dédiée au mode de vie « Zéro Déchet ». Que vous soyez déjà adepte du bocal en verre ou que vous vous demandiez par où commencer, <strong>notre association vous accompagne</strong> — sans jugement, à votre rythme.
             </p>
-            <a href="#sessions" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontWeight: 700, fontSize: 16, padding: "15px 30px" }}>
+            <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontWeight: 700, fontSize: 16, padding: "15px 30px" }}>
               Réserver mon créneau&nbsp;!
             </a>
           </div>
@@ -161,7 +161,9 @@ const ZdThequePage = () => {
               </article>
             ))}
             <a
-              href="mailto:contact@lesdaronnesennord.fr?subject=Réserver mon créneau ZD'thèque"
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               data-card
               className="dc-lift-sm"
               style={{ flex: "0 0 300px", scrollSnapAlign: "start", textDecoration: "none", borderRadius: 20, overflow: "hidden", display: "flex", flexDirection: "column", background: "linear-gradient(160deg,#D8B43A,#C49C22)", border: "2px solid #1B1A17", boxShadow: "0 18px 40px -30px rgba(27,26,23,.7)" }}
@@ -172,8 +174,8 @@ const ZdThequePage = () => {
               <div style={{ padding: 22, flex: 1, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
                 <div style={{ marginBottom: 10 }}><Sparkle size={34} color="#1B1A17" /></div>
                 <h3 style={{ margin: 0, fontFamily: "'Caveat',cursive", fontWeight: 600, fontSize: 30, lineHeight: 1, color: "#1B1A17" }}>Réserver mon créneau</h3>
-                <p style={{ margin: "8px 0 18px", fontSize: 14, lineHeight: 1.55, color: "#4a3c10" }}>Pas de date qui vous convient&nbsp;? Écrivez-nous, on trouve un atelier ensemble.</p>
-                <span style={{ marginTop: "auto", textAlign: "center", width: "100%", background: "#1B1A17", color: "#FBF6E9", fontWeight: 700, fontSize: 15, padding: "12px 18px", borderRadius: 40 }}>Nous écrire</span>
+                <p style={{ margin: "8px 0 18px", fontSize: 14, lineHeight: 1.55, color: "#4a3c10" }}>Retrouvez toutes nos prochaines dates et réservez votre place directement en ligne.</p>
+                <span style={{ marginTop: "auto", textAlign: "center", width: "100%", background: "#1B1A17", color: "#FBF6E9", fontWeight: 700, fontSize: 15, padding: "12px 18px", borderRadius: 40 }}>Réserver en ligne</span>
               </div>
             </a>
           </div>

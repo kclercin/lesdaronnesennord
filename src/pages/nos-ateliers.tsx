@@ -231,14 +231,14 @@ const NosAteliersPage = () => {
         <div className="rc-2" style={{ maxWidth: 1120, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: "clamp(28px,5vw,60px)", alignItems: "center" }}>
           <div>
             <div style={{ width: "min(450px,100%)", aspectRatio: "1", margin: "0 auto" }}>
-              <LogoCircle label="Nos ateliers" fontSize={24} color="#1B1A17" />
+              <LogoCircle label={"Nos ateliers\nartisans"} fontSize={26} color="#1B1A17" />
             </div>
           </div>
           <div>
             <div style={{ fontFamily: "'Caveat',cursive", fontSize: 34, color: "#B8911E", transform: "rotate(-1deg)", lineHeight: 1 }}>Formulez au naturel&nbsp;!</div>
-            <h1 className="rc-htitle" style={{ margin: "6px 0 0", fontFamily: "'Anton',sans-serif", textTransform: "uppercase", fontWeight: 400, fontSize: "clamp(50px,8vw,96px)", lineHeight: 0.9, letterSpacing: ".5px", color: "#1B1A17" }}>Nos ateliers</h1>
+            <h1 className="rc-htitle" style={{ margin: "6px 0 0", fontFamily: "'Anton',sans-serif", textTransform: "uppercase", fontWeight: 400, fontSize: "clamp(50px,8vw,96px)", lineHeight: 0.9, letterSpacing: ".5px", color: "#1B1A17" }}>Nos ateliers artisans</h1>
             <p style={{ margin: "18px 0 0", fontSize: 17, lineHeight: 1.7, color: "#4A463C", maxWidth: "46ch" }}>
-              Envie de décrypter les étiquettes, de reprendre le contrôle de ce que vous mettez sur votre peau et de passer un moment unique&nbsp;? <strong>Glissez-vous dans la peau d'un artisan</strong> le temps d'un atelier&nbsp;!
+              Envie de découvrir un savoir-faire, de vous initier à une pratique et de passer un moment unique. <strong>Glissez-vous dans la peau d'un artisan</strong> le temps d'un atelier&nbsp;!
             </p>
             <a href="/contact#form" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontWeight: 700, fontSize: 16, padding: "15px 30px" }}>Réserver un atelier</a>
           </div>

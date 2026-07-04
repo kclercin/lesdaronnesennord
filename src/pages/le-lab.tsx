@@ -33,7 +33,7 @@ const LeLabPage = () => (
             Le LAB
           </h1>
           <p style={{ margin: "18px 0 0", fontSize: 17, lineHeight: 1.7, color: "#4A463C", maxWidth: "46ch" }}>
-            Vous êtes artisan, créateur ou porteur de projet et vous souhaitez transmettre votre savoir-faire à travers des ateliers&nbsp;? <strong>Ne restez pas seul&nbsp;!</strong> Le LAB met à votre disposition un lieu et une équipe pluridisciplinaire pour concevoir, structurer et animer vos propres ateliers au naturel.
+            Vous êtes artisan, créateur ou porteur de projet et vous souhaitez transmettre votre savoir-faire à travers des ateliers&nbsp;? <strong>Ne restez pas seul&nbsp;!</strong> Le LAB met à votre disposition un lieu et une équipe pluridisciplinaire pour concevoir, structurer et animer vos propres ateliers tout naturellement.
           </p>
           <a href="/contact?sujet=lab#form" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontWeight: 700, fontSize: 16, padding: "15px 30px" }}>
             Travaillons ensemble&nbsp;!

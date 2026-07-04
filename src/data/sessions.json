@@ -1,8 +1,6 @@
 {
-  "bookingUrl": "https://www.lesdaronnesennord.fr/reserver",
+  "bookingUrl": "https://booking.myrezapp.com/fr/online/booking/minisite/16074/les-daronnes-en-nord",
   "sessions": [
-    { "day": "10", "month": "Juin 2026", "place": "Centre Social Cocteau", "city": "Villeneuve-d'Ascq" },
-    { "day": "24", "month": "Juin 2026", "place": "Le LAB", "city": "Lys-lez-Lannoy" },
     { "day": "29", "month": "Juil. 2026", "place": "Le LAB", "city": "Lys-lez-Lannoy" },
     { "day": "09", "month": "Sept. 2026", "place": "Médiathèque", "city": "Lille" },
     { "day": "23", "month": "Sept. 2026", "place": "Maison de quartier", "city": "Roubaix" },
