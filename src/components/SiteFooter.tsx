@@ -81,9 +81,7 @@ const SiteFooter = () => {
           </div>
           <div>
             <div style={colTitle}>Contact</div>
-            <FLink href="/contact">Page contact</FLink>
-            <FLink href="mailto:bienvenue@lesdaronnesennord.fr">bienvenue@lesdaronnesennord.fr</FLink>
-            <FLink href="https://lesdaronnesennord.fr">lesdaronnesennord.fr</FLink>
+            <FLink href="/contact">Contact</FLink>
             <span
               style={{
                 display: "block",

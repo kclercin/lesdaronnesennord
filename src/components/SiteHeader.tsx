@@ -10,7 +10,7 @@ const NAV: NavItem[] = [
   { label: "Bienvenue", href: "/#bonjour", key: "" },
   { label: "La ZD'thèque", href: "/la-zd-theque", key: "zdtheque" },
   { label: "Le LAB", href: "/le-lab", key: "lab" },
-  { label: "Nos ateliers", href: "/nos-ateliers", key: "ateliers" },
+  { label: "Nos ateliers artisans", href: "/nos-ateliers", key: "ateliers" },
   { label: "Contact", href: "/contact", key: "contact" },
 ]
 

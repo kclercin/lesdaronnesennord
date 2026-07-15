@@ -56,7 +56,7 @@ const ATELIERS: Atelier[] = [
     id: 1,
     num: "Atelier nº 1",
     title: "Créez vos cosmétiques solides",
-    desc: "Découvrez la cosmétique home made, naturelle et écoresponsable en compagnie d'Audrey, créatrice de cosmétiques naturels à Villeneuve-d'Ascq. Elle vous ouvre les portes de son charmant atelier, où vous concevez vos propres soins solides.",
+    desc: "Découvrez la cosmétique home made, naturelle et écoresponsable en compagnie d'Audrey, créatrice de cosmétiques naturels. Elle vous ouvre les portes de son charmant atelier, où vous concevez vos propres soins solides.",
     img: imgSolides,
     imgAlt: "Atelier de fabrication de cosmétiques solides avec Audrey",
     imageSide: "left",
@@ -78,7 +78,7 @@ const ATELIERS: Atelier[] = [
     id: 2,
     num: "Atelier nº 2",
     title: "Réalisez votre duo de rouges à lèvres",
-    desc: "Révélez votre beauté au naturel en compagnie d'Audrey, créatrice de cosmétiques naturels à Villeneuve-d'Ascq. Plongez dans l'univers fascinant de la fabrication de cosmétiques et créez vos propres rouges à lèvres.",
+    desc: "Révélez votre beauté au naturel en compagnie d'Audrey, créatrice de cosmétiques naturels. Plongez dans l'univers fascinant de la fabrication de cosmétiques et créez vos propres rouges à lèvres.",
     img: imgRouges,
     imgAlt: "Duo de rouges à lèvres naturels en étui bambou",
     imageSide: "right",
@@ -100,7 +100,7 @@ const ATELIERS: Atelier[] = [
     id: 3,
     num: "Atelier nº 3",
     title: "Créez votre crème de jour",
-    desc: "Plongez dans l'univers naturel et bienveillant d'Audrey, fabricante de cosmétiques à Villeneuve-d'Ascq. Entrez dans le monde fascinant de la fabrication de cosmétiques et composez votre propre crème de jour, sur mesure.",
+    desc: "Plongez dans l'univers naturel et bienveillant d'Audrey, fabricante de cosmétiques. Entrez dans le monde fascinant de la fabrication de cosmétiques et composez votre propre crème de jour, sur mesure.",
     img: imgCreme,
     imgAlt: "Fabrication d'une crème de jour naturelle en atelier",
     imageSide: "left",
@@ -186,7 +186,10 @@ const AtelierCard = ({
       </div>
 
       {/* Déroulé */}
-      <div style={{ padding: "clamp(16px,1.8vw,22px) clamp(26px,3vw,40px)", borderTop: "2.5px solid #1B1A17", background: "#FFFFFF" }}>
+      <div
+        className="flex gap-4"
+        style={{ padding: "clamp(16px,1.8vw,22px) clamp(26px,3vw,40px)", borderTop: "2.5px solid #1B1A17", background: "#FFFFFF" }}
+      >
         <button
           type="button"
           onClick={onToggle}
@@ -212,7 +215,8 @@ const AtelierCard = ({
             </div>
           </>
         )}
-        <a href="/contact#form" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontSize: 15, padding: "13px 26px" }}>
+        <a
+          href="https://wecandoo.fr/artisan/lille-cosmetique-audrey" target="_blank" rel="noopener noreferrer" className="dc-btn dc-btn-dark" style={{ display: "inline-block", fontSize: 15, padding: "13px 26px" }}>
           Réserver cet atelier
         </a>
       </div>
@@ -240,7 +244,7 @@ const NosAteliersPage = () => {
             <p style={{ margin: "18px 0 0", fontSize: 17, lineHeight: 1.7, color: "#4A463C", maxWidth: "46ch" }}>
               Envie de découvrir un savoir-faire, de vous initier à une pratique et de passer un moment unique. <strong>Glissez-vous dans la peau d'un artisan</strong> le temps d'un atelier&nbsp;!
             </p>
-            <a href="/contact#form" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontWeight: 700, fontSize: 16, padding: "15px 30px" }}>Réserver un atelier</a>
+            <a href="https://wecandoo.fr/artisan/lille-cosmetique-audrey" target="_blank" rel="noopener noreferrer" className="dc-btn dc-btn-dark" style={{ display: "inline-block", marginTop: 26, fontWeight: 700, fontSize: 16, padding: "15px 30px" }}>Réserver un atelier</a>
           </div>
         </div>
       </section>
@@ -341,7 +345,7 @@ const NosAteliersPage = () => {
             Réservez votre atelier cosmétique ou parlez-nous de votre projet de team-building.
           </p>
           <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginTop: 28 }}>
-            <a href="/contact#form" className="dc-btn dc-btn-dark" style={{ fontSize: 16, padding: "15px 30px" }}>Réserver un atelier</a>
+            <a href="https://wecandoo.fr/artisan/lille-cosmetique-audrey" target="_blank" rel="noopener noreferrer" className="dc-btn dc-btn-dark" style={{ fontSize: 16, padding: "15px 30px" }}>Réserver un atelier</a>
           </div>
         </div>
       </section>
@@ -356,7 +360,7 @@ export const Head: HeadFC = () => (
     <title>Nos ateliers cosmétiques — Créez vos soins au naturel | Les Daronnes en Nord</title>
     <meta
       name="description"
-      content="Ateliers cosmétiques à Villeneuve-d'Ascq : cosmétiques solides, rouges à lèvres et crème de jour faits maison avec Audrey. Repartez avec vos créations et vos recettes."
+      content="Ateliers cosmétiques à Lys-lez-Lannoy : cosmétiques solides, rouges à lèvres et crème de jour faits maison avec Audrey. Repartez avec vos créations et vos recettes."
     />
     <html lang="fr" />
   </>
