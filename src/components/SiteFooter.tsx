@@ -82,7 +82,7 @@ const SiteFooter = () => {
           <div>
             <div style={colTitle}>Contact</div>
             <FLink href="/contact">Page contact</FLink>
-            <FLink href="mailto:contact@lesdaronnesennord.fr">contact@lesdaronnesennord.fr</FLink>
+            <FLink href="mailto:bienvenue@lesdaronnesennord.fr">bienvenue@lesdaronnesennord.fr</FLink>
             <FLink href="https://lesdaronnesennord.fr">lesdaronnesennord.fr</FLink>
             <span
               style={{

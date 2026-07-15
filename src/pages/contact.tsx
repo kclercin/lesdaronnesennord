@@ -18,7 +18,7 @@ const buildMailto = (subject: string, fd: FormData) => {
   const message = (fd.get("message") as string) || ""
   const body = "Bonjour Les Daronnes,\n\n" + message + "\n\n— " + name + (email ? " (" + email + ")" : "")
   return (
-    "mailto:contact@lesdaronnesennord.fr?subject=" +
+    "mailto:bienvenue@lesdaronnesennord.fr?subject=" +
     encodeURIComponent("[" + subject + "] " + name) +
     "&body=" +
     encodeURIComponent(body)
@@ -120,8 +120,8 @@ const ContactPage = () => {
               </div>
               <div style={{ fontFamily: "'Anton',sans-serif", textTransform: "uppercase", letterSpacing: "2px", fontSize: 13, color: "#E8BE36" }}>Nous joindre</div>
               <h3 style={{ margin: "8px 0 18px", fontFamily: "'Caveat',cursive", fontWeight: 600, fontSize: 30, lineHeight: 1 }}>Directement</h3>
-              <a href="mailto:contact@lesdaronnesennord.fr" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#FBF6E9", fontSize: 15, padding: "8px 0" }}>
-                <IconMailLine /> contact@lesdaronnesennord.fr
+              <a href="mailto:bienvenue@lesdaronnesennord.fr" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#FBF6E9", fontSize: 15, padding: "8px 0" }}>
+                <IconMailLine /> bienvenue@lesdaronnesennord.fr
               </a>
               <a href="https://lesdaronnesennord.fr" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "#FBF6E9", fontSize: 15, padding: "8px 0" }}>
                 <IconGlobe /> lesdaronnesennord.fr
