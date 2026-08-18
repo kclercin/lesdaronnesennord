@@ -747,31 +747,11 @@ git commit -m "feat: doodles convertis en composants Astro + registre d'icones"
 }
 ```
 
-- [ ] **Step 2: Écrire le schéma de validation**
+- [ ] **Step 2: Écrire la validation des réglages du site**
 
-À ce stade, seuls les réglages du site sont validés. Ce fichier grandira à chaque page.
-
-```typescript
-// src/content.config.ts
-import { defineCollection } from 'astro:content'
-import { glob } from 'astro/loaders'
-import { z } from 'astro/zod'
-
-const pages = defineCollection({
-  loader: glob({ pattern: '*.json', base: './src/content/pages' }),
-  schema: z.object({
-    seo: z.object({
-      titre: z.string().min(1),
-      description: z.string().optional(),
-    }),
-  }).passthrough(),
-})
-
-export const collections = { pages }
-```
-
-> `.passthrough()` laisse passer les clés de section non encore déclarées. Chaque tâche de page
-> remplacera progressivement ce laissez-passer par un schéma strict.
+> `src/content.config.ts` n'est **pas** créé ici : le dossier `src/content/pages/` n'existe pas
+> encore, et une collection `glob` pointant sur un dossier absent est un état bancal. Il est créé
+> en tâche 5, avec la première page qui le consomme.
 
 ```typescript
 // src/lib/site.ts
@@ -799,8 +779,11 @@ conservées). Les favicons pointent vers `public/` — les 6 PNG et `robots.txt`
 `static/` doivent être déplacés dans `public/` :
 
 ```bash
-mv static/* public/ && rmdir static
+mkdir -p public && mv static/* public/ && rmdir static
 ```
+
+> `public/` a été supprimé en tâche 2 (c'était la sortie de build Gatsby). Il faut donc le
+> recréer, cette fois comme dossier **source** — d'où le `mkdir -p`.
 
 ```astro
 ---
@@ -1057,7 +1040,22 @@ const NAV = [
 </style>
 ```
 
-> `.dc-nav-link` reste dans `global.css` (déjà écrit en tâche 2).
+> ⚠️ `.dc-nav-link` n'est **pas** dans `global.css` : les 4 classes de navigation
+> (`dc-nav-link`, `dc-burger`, `dc-mobile-panel`, `dc-mobile-link`) ne servent qu'au header et
+> deviennent du CSS scoped. Le `<style>` ci-dessus doit donc **définir** `.dc-nav-link` lui-même :
+>
+> ```css
+> .dc-nav-link {
+>   text-decoration: none;
+>   color: var(--encre);
+>   font-weight: 500;
+>   font-size: 15px;
+>   transition: color 0.15s ease;
+> }
+> .dc-nav-link:hover {
+>   color: var(--or-fonce);
+> }
+> ```
 
 - [ ] **Step 5: Écrire le footer**
 
