@@ -1,0 +1,49 @@
+---
+// src/components/Layout.astro
+import SiteHeader from './SiteHeader.astro'
+import SiteFooter from './SiteFooter.astro'
+import '../styles/global.css'
+
+interface Props {
+  titre: string
+  description?: string
+  active?: '' | 'accueil' | 'zdtheque' | 'lab' | 'ateliers' | 'contact'
+}
+
+const { titre, description, active = '' } = Astro.props
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titre}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <SiteHeader active={active} />
+    <slot />
+    <SiteFooter />
+  </body>
+</html>
+
+<style>
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+</style>

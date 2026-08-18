@@ -1,0 +1,207 @@
+---
+// src/components/SiteHeader.astro
+import Logo from './icons/Logo.astro'
+
+interface Props {
+  active?: string
+}
+const { active = '' } = Astro.props
+
+const NAV = [
+  { label: 'Bienvenue', href: '/#bonjour', cle: '' },
+  { label: "La ZD'thèque", href: '/la-zd-theque', cle: 'zdtheque' },
+  { label: 'Le LAB', href: '/le-lab', cle: 'lab' },
+  { label: 'Nos ateliers artisans', href: '/nos-ateliers', cle: 'ateliers' },
+  { label: 'Contact', href: '/contact', cle: 'contact' },
+]
+---
+
+<header class="entete">
+  <a href="/" aria-label="Les Daronnes en Nord — accueil" class="marque">
+    <Logo height={54} />
+  </a>
+
+  <nav class="liens">
+    {
+      NAV.map((item) => (
+        <a href={item.href} class="dc-nav-link" aria-current={item.cle && item.cle === active ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a href="/la-zd-theque#sessions" class="dc-btn dc-btn-dark reserver">Réserver un atelier</a>
+  </nav>
+
+  <button type="button" class="dc-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
+    <svg class="i-ouvrir" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+      <path d="M4 7h16 M4 12h16 M4 17h16"></path>
+    </svg>
+    <svg class="i-fermer" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+      <path d="M5 5 19 19 M19 5 5 19"></path>
+    </svg>
+  </button>
+
+  <div class="panneau" id="menu-mobile" hidden>
+    {
+      NAV.map((item) => (
+        <a href={item.href} class="lien-mobile" aria-current={item.cle && item.cle === active ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a href="/la-zd-theque#sessions" class="dc-btn dc-btn-dark cta-mobile">Réserver un atelier</a>
+  </div>
+</header>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>('.dc-burger')!
+  const panneau = document.querySelector<HTMLElement>('#menu-mobile')!
+
+  const definirEtat = (ouvert: boolean) => {
+    burger.setAttribute('aria-expanded', String(ouvert))
+    burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu')
+    panneau.hidden = !ouvert
+  }
+
+  burger.addEventListener('click', () => {
+    definirEtat(burger.getAttribute('aria-expanded') !== 'true')
+  })
+
+  panneau.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) definirEtat(false)
+  })
+</script>
+
+<style>
+  .entete {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px clamp(20px, 5vw, 56px);
+    background: rgba(251, 246, 233, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--encre-12);
+  }
+
+  .marque {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .liens {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+  }
+
+  /* ces 4 classes ne servent qu'au header : elles sont scoped, pas globales */
+  .dc-nav-link {
+    text-decoration: none;
+    color: var(--encre);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.15s ease;
+  }
+  .dc-nav-link:hover {
+    color: var(--or-fonce);
+  }
+
+  .reserver {
+    font-size: 14px;
+    padding: 11px 20px;
+  }
+
+  /* soulignement or de la page courante — remplace le composant <Underline /> */
+  .dc-nav-link[aria-current='page']::after {
+    content: '';
+    display: block;
+    height: 2.5px;
+    background: var(--or);
+    border-radius: 2px;
+    margin-top: 3px;
+  }
+
+  .dc-burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 2px solid var(--encre);
+    border-radius: 14px;
+    background: transparent;
+    color: var(--encre);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .dc-burger:hover {
+    background: var(--encre);
+    color: var(--creme);
+  }
+
+  .dc-burger .i-fermer {
+    display: none;
+  }
+  .dc-burger[aria-expanded='true'] .i-ouvrir {
+    display: none;
+  }
+  .dc-burger[aria-expanded='true'] .i-fermer {
+    display: block;
+  }
+
+  .panneau {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--creme);
+    border-bottom: 1px solid var(--encre-12);
+    box-shadow: 0 18px 30px -22px rgba(27, 26, 23, 0.6);
+    display: flex;
+    flex-direction: column;
+    padding: 10px clamp(20px, 5vw, 56px) 20px;
+    gap: 2px;
+  }
+  .panneau[hidden] {
+    display: none;
+  }
+
+  .lien-mobile {
+    text-decoration: none;
+    color: var(--encre);
+    font-weight: 500;
+    font-size: 17px;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--encre-08);
+  }
+  .lien-mobile:last-of-type {
+    border-bottom: none;
+  }
+  .lien-mobile[aria-current='page'] {
+    color: var(--or-fonce);
+  }
+
+  .cta-mobile {
+    margin-top: 12px;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 860px) {
+    .liens {
+      display: none;
+    }
+    .dc-burger {
+      display: inline-flex;
+    }
+  }
+</style>
