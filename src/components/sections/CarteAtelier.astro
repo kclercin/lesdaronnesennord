@@ -251,11 +251,16 @@ const colonnes = deroule.length === 3 ? 3 : 2
   .bascule {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     font-size: 15px;
     padding: 12px 22px;
     list-style: none;
     cursor: pointer;
+    /* L'original était un <button>, que la feuille de style du navigateur centre
+       par défaut (text-align: center). Un <summary> n'hérite pas de ce défaut :
+       sans cette ligne, le libellé se cale à gauche. */
+    text-align: center;
   }
   .bascule::-webkit-details-marker {
     display: none;
