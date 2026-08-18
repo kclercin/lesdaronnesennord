@@ -79,7 +79,7 @@ numériques à corriger, pour que rien ne soit laissé à l'interprétation.
 
 ### Fichiers supprimés (tâche 12)
 
-`gatsby-config.ts`, `gatsby-browser.js`, `gatsby-ssr.js`, `postcss.config.js`, `tailwind.config.js`, `src/gatsby-types.d.ts`, `src/images.d.ts`, `src/data/sessions.json`, `src/components/doodles.tsx`, `src/components/Layout.tsx`, `src/components/SiteHeader.tsx`, `src/components/SiteFooter.tsx`, `src/pages/*.tsx`, `.cache/`
+`gatsby-config.ts`, `gatsby-browser.js`, `gatsby-ssr.js`, `postcss.config.js`, `tailwind.config.js`, `src/gatsby-types.d.ts`, `src/images.d.ts`, `src/data/sessions.json`, `legacy/components/doodles.tsx`, `legacy/components/Layout.tsx`, `legacy/components/SiteHeader.tsx`, `legacy/components/SiteFooter.tsx`, `src/pages/*.tsx`, `.cache/`
 
 ---
 
@@ -567,7 +567,7 @@ git commit -m "feat: socle Astro (config, tokens, global.css sans Tailwind)"
 
 ## Task 3: Composants icônes
 
-`src/components/doodles.tsx` exporte 30 composants SVG. Ils deviennent 30 fichiers `.astro` plus
+`legacy/components/doodles.tsx` exporte 30 composants SVG. Ils deviennent 30 fichiers `.astro` plus
 un registre qui permet de les résoudre depuis une clé JSON.
 
 **Files:**
@@ -1256,7 +1256,7 @@ valider le patron de conversion avant de l'appliquer aux pages complexes.
 - Create: `src/content/pages/le-lab.json`
 - Create: `src/pages/le-lab.astro`
 - Modify: `src/content.config.ts`
-- Delete: `src/pages/le-lab.tsx`
+- Delete: `legacy/pages/le-lab.tsx`
 
 ### Le patron de conversion (à réutiliser pour toutes les pages suivantes)
 
@@ -1582,7 +1582,6 @@ const RAYONS = [
 - [ ] **Step 7: Supprimer l'ancienne page et construire**
 
 ```bash
-rm src/pages/le-lab.tsx
 npm run build
 ```
 
@@ -1630,7 +1629,7 @@ Page la plus riche : 444 lignes, 69 valeurs numériques, 6 sections. Aucune inte
 - Create: `src/content/pages/accueil.json`
 - Create: `src/pages/index.astro`
 - Modify: `src/content.config.ts`
-- Delete: `src/pages/index.tsx`
+- Delete: `legacy/pages/index.tsx`
 
 - [ ] **Step 1: Écrire le contenu**
 
@@ -1856,7 +1855,6 @@ import equipe from '../images/equipe-daronnes.png'
 - [ ] **Step 5: Supprimer l'ancienne page et construire**
 
 ```bash
-rm src/pages/index.tsx
 npm run build
 ```
 
@@ -1892,7 +1890,7 @@ git commit -m "feat: page accueil en Astro, contenu extrait en JSON"
 - Create: `src/content/sessions/*.json` (5 fichiers)
 - Create: `src/pages/la-zd-theque.astro`
 - Modify: `src/content.config.ts`
-- Delete: `src/pages/la-zd-theque.tsx`, `src/data/sessions.json`
+- Delete: `legacy/pages/la-zd-theque.tsx`, `src/data/sessions.json`
 
 - [ ] **Step 1: Éclater sessions.json en collection**
 
@@ -2057,7 +2055,7 @@ const sessions = (await getCollection('sessions')).sort((a, b) => a.data.ordre -
 - [ ] **Step 6: Construire et vérifier le JS livré**
 
 ```bash
-rm src/pages/la-zd-theque.tsx src/data/sessions.json
+rm src/data/sessions.json
 npm run build
 find dist -name '*.js' -exec wc -c {} +
 ```
@@ -2101,7 +2099,7 @@ L'accordéon React disparaît complètement au profit de `<details>`.
 - Create: `src/components/sections/CarteAtelier.astro`
 - Create: `src/pages/nos-ateliers.astro`
 - Modify: `src/content.config.ts`
-- Delete: `src/pages/nos-ateliers.tsx`
+- Delete: `legacy/pages/nos-ateliers.tsx`
 
 - [ ] **Step 1: Déplacer les images d'atelier vers public/uploads**
 
@@ -2462,7 +2460,6 @@ const colonnes = atelier.deroule.length === 3 ? 3 : 2
 - [ ] **Step 7: Construire et vérifier l'absence de JS**
 
 ```bash
-rm src/pages/nos-ateliers.tsx
 npm run build
 find dist -name '*.js' | wc -l
 ```
@@ -2505,7 +2502,7 @@ git commit -m "feat: page Nos ateliers, collection ateliers, accordeon natif <de
 - Create: `src/pages/contact.astro`
 - Create: `src/pages/404.astro`
 - Modify: `src/content.config.ts`
-- Delete: `src/pages/contact.tsx`, `src/pages/404.tsx`
+- Delete: `legacy/pages/contact.tsx`, `legacy/pages/404.tsx`
 
 - [ ] **Step 1: Écrire le contenu**
 
@@ -2624,7 +2621,6 @@ Page 404 — une seule section (`404.tsx:7-45`), aucune interactivité, aucun co
 - [ ] **Step 4: Construire et vérifier**
 
 ```bash
-rm src/pages/contact.tsx src/pages/404.tsx
 npm run build
 ls dist/404.html dist/contact/index.html
 ```
@@ -3011,8 +3007,7 @@ git commit -m "feat: Procfile et en-tetes de cache pour buildpacks Heroku"
 rm -f gatsby-config.ts gatsby-browser.js gatsby-ssr.js
 rm -f src/gatsby-types.d.ts src/images.d.ts
 rm -rf src/data .cache
-rm -f src/components/doodles.tsx src/components/Layout.tsx \
-      src/components/SiteHeader.tsx src/components/SiteFooter.tsx
+rm -rf legacy
 ```
 
 > `scripts/capture-baseline.mjs` est **conservé** : la tâche 13 s'en sert pour la vérification
