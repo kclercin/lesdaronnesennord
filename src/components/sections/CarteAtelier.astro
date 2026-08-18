@@ -113,14 +113,14 @@ const colonnes = deroule.length === 3 ? 3 : 2
     order: 1;
   }
 
+  /* Sous 860px la grille passe à 1 colonne, mais l'ordre du DOM/CSS reste
+     inchangé : pour "droite" le texte (order:1) doit rester au-dessus de la
+     photo (order:2), exactement comme dans l'original où le JSX plaçait
+     textCol avant Media pour imageSide "right". Ne pas réinitialiser order ici. */
   @media (max-width: 860px) {
     .fiche-grille,
     .fiche-grille[data-cote='droite'] {
       grid-template-columns: 1fr;
-    }
-    .fiche-grille[data-cote='droite'] .fiche-media,
-    .fiche-grille[data-cote='droite'] .fiche-texte {
-      order: 0;
     }
   }
 
@@ -225,13 +225,25 @@ const colonnes = deroule.length === 3 ? 3 : 2
   }
 
   /* ===== bas de fiche : déroulé + réservation ===== */
+  /* Traduction littérale de l'original "flex gap-4" (Tailwind, retiré à la
+     tâche 2) : display:flex + gap:16px, SANS flex-wrap. Fermé, les deux
+     boutons se partagent donc la ligne unique et se compriment (flex-shrink
+     par défaut) plutôt que de s'empiler. */
   .fiche-actions {
     display: flex;
-    flex-wrap: wrap;
     gap: 16px;
     padding: clamp(16px, 1.8vw, 22px) clamp(26px, 3vw, 40px);
     border-top: 2.5px solid var(--encre);
     background: var(--blanc);
+  }
+  /* Ouvert, le contenu du déroulé est bien plus large qu'un bouton : on
+     autorise le retour à la ligne et on force le déroulé sur toute la
+     largeur pour ne pas écraser le lien de réservation à côté de lui. */
+  .fiche-actions:has(details[open]) {
+    flex-wrap: wrap;
+  }
+  .fiche-actions:has(details[open]) .fiche-deroule {
+    flex-basis: 100%;
   }
 
   /* bascule du libellé sans JavaScript : le contenu vient du CMS via des
