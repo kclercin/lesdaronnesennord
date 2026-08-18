@@ -1,0 +1,91 @@
+{
+  "seo": {
+    "titre": "Les Daronnes en Nord — Ateliers cosmétiques maison & zéro déchet à Lille",
+    "description": "Ateliers de cosmétiques maison et zéro déchet à Lille et dans la métropole lilloise, animés par Les Daronnes en Nord. Apprendre, partager, agir — au naturel."
+  },
+  "hero": {
+    "kicker": "Bienvenue, ravies de vous voir",
+    "titreAvant": "Réapprendre à ",
+    "titreAccent": "faire soi-même",
+    "titreApres": " au naturel.",
+    "texte": "Ateliers de cosmétiques maison et zéro déchet à Lille et dans la métropole, animés par <strong>Les Daronnes en Nord</strong>. On touche les matières, on formule, on rit.",
+    "cta": [
+      { "label": "Découvrir nos activités", "href": "/la-zd-theque", "style": "sombre" },
+      { "label": "Réserver un atelier", "href": "/la-zd-theque#sessions", "style": "contour-or" }
+    ]
+  },
+  "activites": {
+    "kicker": "Apprendre · Partager · Agir",
+    "titre": "Nos activités",
+    "texte": "Réapprendre à faire soi-même au naturel.",
+    "cercles": [
+      { "href": "/la-zd-theque", "label": "La ZD'thèque", "taillePolice": 26, "texte": "Sessions gratuites zéro déchet & cosmétiques maison" },
+      { "href": "/le-lab", "label": "Le LAB", "taillePolice": 30, "texte": "Accompagnement des artisans & créateurs" },
+      { "href": "/nos-ateliers", "label": "Les Ateliers\nd'Artisans", "taillePolice": 24, "texte": "Les recettes & savoir-faire qu'on y fabrique" }
+    ]
+  },
+  "engagements": {
+    "kicker": "Nos engagements",
+    "titre": "Créateurs de liens\net d'autonomie",
+    "texte": "Chez les Daronnes, le savoir ne se garde pas : il se transmet de main en main.",
+    "cartes": [
+      {
+        "numero": "01",
+        "icone": "transmission",
+        "titre": "La transmission du savoir-faire",
+        "paragraphes": [
+          "<strong>Grand public —</strong> des ateliers pratiques et accessibles pour réapprendre les gestes de l'autonomie : cosmétiques naturels, produits ménagers sains, upcycling.",
+          "<strong>Professionnels —</strong> via <em>Le LAB</em>, notre équipe pluridisciplinaire coache artisans et créateurs pour concevoir et animer leurs propres ateliers."
+        ]
+      },
+      {
+        "numero": "02",
+        "icone": "partage",
+        "titre": "Le partage équitable",
+        "paragraphes": [
+          "Une écologie généreuse, qui fait du bien au portefeuille comme à la planète.",
+          "<strong>La ZD'thèque —</strong> des sessions gratuites d'entraide et de troc de connaissances, où l'on prend soin de nos objets, où l'on teste et où l'on crée ensemble, au local, sans aucun jugement."
+        ]
+      },
+      {
+        "numero": "03",
+        "icone": "experience",
+        "titre": "Vivre des expériences uniques",
+        "paragraphes": [
+          "On retient 10&nbsp;% de ce qu'on lit, mais 90&nbsp;% de ce que l'on fait. Place à l'expérience concrète, sensorielle et humaine.",
+          "Nos ateliers sont des bulles de déconnexion numérique, ancrées au cœur de notre région."
+        ]
+      }
+    ]
+  },
+  "smd": {
+    "kicker": "Notre politique SMD",
+    "titre": "Service\nMinimum\nDigital",
+    "texte": "En cohérence avec nos ateliers, on applique le numérique au strict nécessaire. Moins d'écrans, moins de données, plus d'humain.",
+    "citation": "« Le meilleur octet est celui qu'on n'envoie pas. »",
+    "cartes": [
+      { "icone": "mail-or", "titre": "Sobriété des échanges", "texte": "Priorité aux circuits courts : une newsletter mensuelle plutôt que dix mails." },
+      { "icone": "fichier", "titre": "Légèreté des fichiers", "texte": "Documents compressés et liens éphémères plutôt que pièces jointes lourdes." },
+      { "icone": "balai", "titre": "Nettoyage régulier", "texte": "Campagnes annuelles de suppression des données inutiles sur notre cloud." },
+      { "icone": "feuille", "titre": "Low-tech", "texte": "Sites web légers et éco-conçus, stockage vidéo HD limité au minimum." }
+    ]
+  },
+  "apropos": {
+    "kicker": "À propos",
+    "titre": "Les Daronnes\nen Nord",
+    "imageAlt": "L'équipe des Daronnes en Nord",
+    "paragraphes": [
+      "Nous transformons de grands enjeux écologiques en gestes simples, ludiques et conviviaux. Le passage à l'action n'est pas une contrainte, mais une occasion de mieux consommer, de faire des économies et de redécouvrir le plaisir du « faire soi-même ».",
+      "Nos rendez-vous sont <strong>anonymes et sans jugement</strong> — à Lille, Villeneuve-d'Ascq, Lys-lez-Lannoy et partout dans la métropole."
+    ],
+    "etiquettes": ["Apprendre", "Partager", "Agir"]
+  },
+  "cta": {
+    "titre": "Venez pas les mains vides !",
+    "texte": "Alimentez notre ZD'thèque avec vos petits trésors du quotidien comme des bocaux, des boîtes d'œufs, tissus en coton, tee-shirts, linge de maison, des journaux…",
+    "boutons": [
+      { "label": "Réserver un atelier gratuit", "href": "/la-zd-theque#sessions", "style": "sombre" },
+      { "label": "Voir nos activités", "href": "/la-zd-theque", "style": "contour-plein" }
+    ]
+  }
+}
