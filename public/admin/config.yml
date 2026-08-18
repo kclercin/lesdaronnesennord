@@ -1,0 +1,895 @@
+backend:
+  name: github
+  repo: kclercin/lesdaronnesennord
+  branch: master
+  auth_methods: [token]
+
+publish_mode: editorial_workflow
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://lesdaronnesennord.fr
+
+collections:
+  - name: parametres
+    label: 'Réglages & pages'
+    files:
+      - name: site
+        label: 'Réglages généraux'
+        file: src/content/site.json
+        format: json
+        fields:
+          - label: 'Adresse e-mail de contact'
+            name: email
+            widget: string
+            hint: "Adresse affichée sur le site pour être contactée (ex. bienvenue@exemple.fr)."
+            pattern: ['^[^\s@]+@[^\s@]+\.[^\s@]+$', 'Doit être une adresse e-mail valide (ex. nom@domaine.fr).']
+          - label: 'Adresse du site (URL)'
+            name: siteUrl
+            widget: string
+            hint: "URL complète du site, avec https://. À ne modifier qu'en cas de changement de nom de domaine."
+            pattern: ['^https?://', 'Doit commencer par http:// ou https://.']
+          - label: 'Zone géographique'
+            name: zone
+            widget: string
+            hint: "Ex. « Métropole lilloise · Nord (59) ». Affichée dans le pied de page du site."
+          - label: "Phrase d'accroche du site"
+            name: baseline
+            widget: text
+            hint: "Résume l'association en une phrase. Utilisée pour le partage sur les réseaux sociaux et par les moteurs de recherche."
+          - label: 'Mention légale courte'
+            name: mentionLegale
+            widget: string
+            hint: "Ex. « Association loi 1901 ». Affichée dans le pied de page."
+          - label: 'Mention « Service Minimum Digital »'
+            name: mentionSmd
+            widget: string
+            hint: "Phrase courte rappelant l'engagement de sobriété numérique de l'association, affichée dans le pied de page."
+          - label: "Lien de réservation — La ZD'thèque"
+            name: reservationZdtheque
+            widget: string
+            hint: "URL complète (https://…) vers la plateforme de réservation des sessions gratuites de la ZD'thèque."
+            pattern: ['^https?://', 'Doit commencer par http:// ou https://.']
+          - label: 'Lien de réservation — Ateliers'
+            name: reservationAteliers
+            widget: string
+            hint: "URL complète (https://…) vers la plateforme de réservation des ateliers payants (ex. Wecandoo)."
+            pattern: ['^https?://', 'Doit commencer par http:// ou https://.']
+
+      - name: accueil
+        label: 'Page — Accueil'
+        file: src/content/pages/accueil.json
+        format: json
+        fields:
+          - label: 'Référencement (Google)'
+            name: seo
+            widget: object
+            hint: "Informations utilisées par les moteurs de recherche et lors du partage sur les réseaux sociaux."
+            fields: &seoFields
+              - label: 'Titre de la page (SEO)'
+                name: titre
+                widget: string
+                hint: "Titre affiché dans l'onglet du navigateur et dans les résultats Google (environ 60 caractères max)."
+              - label: 'Description (SEO)'
+                name: description
+                widget: text
+                required: false
+                hint: "Texte affiché sous le titre dans les résultats Google. Facultatif, environ 150-160 caractères recommandés."
+
+          - label: 'Section — Introduction (hero)'
+            name: hero
+            widget: object
+            hint: "Le titre principal est composé de 3 morceaux mis bout à bout : « Début du titre » + « Titre en couleur » + « Fin du titre ». Le morceau du milieu est mis en valeur visuellement."
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+                hint: "Petit texte affiché au-dessus du titre principal."
+              - label: 'Début du titre'
+                name: titreAvant
+                widget: string
+                required: false
+                hint: "Peut être laissé vide."
+              - label: 'Titre en couleur (accent)'
+                name: titreAccent
+                widget: string
+                hint: "Partie du titre mise en valeur visuellement."
+              - label: 'Fin du titre'
+                name: titreApres
+                widget: string
+                required: false
+                hint: "Peut être laissé vide."
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte la balise <strong>...</strong> pour mettre un passage en gras."
+              - label: "Boutons d'appel à l'action"
+                name: cta
+                widget: list
+                min: 1
+                hint: "Au moins un bouton requis."
+                fields: &boutonFields
+                  - label: 'Texte du bouton'
+                    name: label
+                    widget: string
+                  - label: 'Lien (page ou ancre)'
+                    name: href
+                    widget: string
+                    required: false
+                    hint: "Ex. « /la-zd-theque » ou « /la-zd-theque#sessions ». Laisser vide uniquement si « Lien de réservation externe » est coché ci-dessous."
+                  - label: 'Style du bouton'
+                    name: style
+                    widget: select
+                    hint: "Apparence visuelle du bouton."
+                    options: &styleBoutonOptions
+                      - { label: 'Sombre', value: sombre }
+                      - { label: 'Contour doré', value: contour-or }
+                      - { label: 'Contour plein', value: contour-plein }
+                      - { label: 'Doré', value: or }
+                      - { label: 'Doré vif', value: or-vif }
+                      - { label: 'Fantôme (transparent)', value: fantome }
+                  - label: 'Lien de réservation externe'
+                    name: externe
+                    widget: boolean
+                    required: false
+                    default: false
+                    hint: "Cocher si ce bouton doit ouvrir, dans un nouvel onglet, le lien de réservation externe défini dans les Réglages généraux. Dans ce cas, laisser le champ « Lien » vide."
+
+          - label: 'Section — Nos activités'
+            name: activites
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: "Cercles d'activités (exactement 3)"
+                name: cercles
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cercles : impossible d'en ajouter ou d'en supprimer."
+                fields:
+                  - label: 'Lien (page)'
+                    name: href
+                    widget: string
+                  - label: 'Libellé affiché dans le cercle'
+                    name: label
+                    widget: string
+                    hint: "Un retour à la ligne peut être inséré avec « \\n »."
+                  - label: 'Taille de police (pixels)'
+                    name: taillePolice
+                    widget: number
+                    value_type: int
+                    hint: "Taille du texte dans le cercle, en pixels. Réduire si le libellé est long (valeurs habituelles : 24 à 30)."
+                  - label: 'Texte sous le cercle'
+                    name: texte
+                    widget: string
+
+          - label: 'Section — Nos engagements'
+            name: engagements
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Cartes (exactement 3)'
+                name: cartes
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields:
+                  - label: 'Numéro affiché'
+                    name: numero
+                    widget: string
+                    hint: "Texte affiché tel quel, ex. « 01 »."
+                  - &iconeField
+                    label: 'Icône'
+                    name: icone
+                    widget: select
+                    hint: "Pictogramme affiché sur la carte."
+                    options: &iconeOptions
+                      - { label: 'Transmission', value: transmission }
+                      - { label: 'Partage', value: partage }
+                      - { label: 'Expérience', value: experience }
+                      - { label: 'Enveloppe dorée', value: mail-or }
+                      - { label: 'Fichier doré', value: fichier }
+                      - { label: 'Balai doré', value: balai }
+                      - { label: 'Feuille dorée', value: feuille }
+                      - { label: 'Cosmétique', value: cosmetique }
+                      - { label: 'Spray', value: spray }
+                      - { label: 'Craie', value: craie }
+                      - { label: 'Recyclage', value: recyclage }
+                      - { label: 'Feuille (Le LAB)', value: feuille-lab }
+                      - { label: 'Outils', value: outils }
+                      - { label: 'Étincelle', value: etincelle }
+                      - { label: 'Recette', value: recette }
+                      - { label: 'Clé', value: cle }
+                      - { label: 'Famille', value: famille }
+                      - { label: 'Mixité (genre)', value: genre }
+                      - { label: 'Niveau', value: niveau }
+                      - { label: 'Professionnel', value: pro }
+                      - { label: 'Cycle', value: cycle }
+                      - { label: 'Impact', value: impact }
+                  - label: 'Titre de la carte'
+                    name: titre
+                    widget: string
+                  - label: 'Paragraphes'
+                    name: paragraphes
+                    widget: list
+                    min: 1
+                    hint: "Au moins un paragraphe. Accepte les balises <strong>, <em> et &nbsp;."
+                    field: { label: Paragraphe, name: value, widget: text }
+
+          - label: 'Section — Politique SMD'
+            name: smd
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: text
+                hint: "Un retour à la ligne peut être inséré avec « \\n »."
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Citation'
+                name: citation
+                widget: string
+              - label: 'Cartes (exactement 4)'
+                name: cartes
+                widget: list
+                min: 4
+                max: 4
+                hint: "Ce bloc affiche exactement 4 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: &carteIconeFields
+                  - *iconeField
+                  - label: 'Titre de la carte'
+                    name: titre
+                    widget: string
+                  - label: 'Texte de la carte'
+                    name: texte
+                    widget: string
+                    hint: "Texte court. Accepte &nbsp; pour empêcher un retour à la ligne indésirable."
+
+          - label: 'Section — À propos'
+            name: apropos
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: text
+                hint: "Un retour à la ligne peut être inséré avec « \\n »."
+              - label: "Texte alternatif de l'image (accessibilité)"
+                name: imageAlt
+                widget: string
+                hint: "Obligatoire. C'est le texte lu à voix haute par les lecteurs d'écran pour les personnes non-voyantes. Décrivez simplement ce que montre l'image."
+              - label: 'Paragraphes'
+                name: paragraphes
+                widget: list
+                min: 1
+                hint: "Au moins un paragraphe. Accepte la balise <strong>...</strong>."
+                field: { label: Paragraphe, name: value, widget: text }
+              - label: 'Étiquettes (mots-clés courts)'
+                name: etiquettes
+                widget: list
+                required: false
+                hint: "Courts mots-clés affichés sous forme d'étiquettes, ex. « Apprendre »."
+                field: { label: Étiquette, name: value, widget: string }
+
+          - label: 'Section — Appel à l''action final'
+            name: cta
+            widget: object
+            fields:
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Boutons'
+                name: boutons
+                widget: list
+                min: 1
+                hint: "Au moins un bouton requis."
+                fields: *boutonFields
+
+      - name: le-lab
+        label: 'Page — Le LAB'
+        file: src/content/pages/le-lab.json
+        format: json
+        fields:
+          - label: 'Référencement (Google)'
+            name: seo
+            widget: object
+            hint: "Informations utilisées par les moteurs de recherche et lors du partage sur les réseaux sociaux."
+            fields: *seoFields
+
+          - label: 'Section — Introduction (hero)'
+            name: hero
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Libellé affiché dans le cercle'
+                name: cercleLabel
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte les balises <strong> et &nbsp;."
+              - label: "Bouton d'appel à l'action"
+                name: cta
+                widget: object
+                fields: &lienFields
+                  - label: 'Texte du bouton'
+                    name: label
+                    widget: string
+                  - label: 'Lien (page ou ancre)'
+                    name: href
+                    widget: string
+                    hint: "Ex. « /contact?sujet=lab#form »."
+
+          - label: 'Section — Pour qui ?'
+            name: pourQui
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Cartes (exactement 3)'
+                name: cartes
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: *carteIconeFields
+
+          - label: 'Section — Notre accompagnement'
+            name: accompagnement
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: "Étapes de l'accompagnement"
+                name: etapes
+                widget: list
+                min: 1
+                hint: "Au moins une étape requise."
+                fields: &etapeFields
+                  - label: 'Numéro affiché'
+                    name: numero
+                    widget: string
+                    hint: "Texte affiché tel quel, ex. « 01 »."
+                  - label: "Titre de l'étape"
+                    name: titre
+                    widget: string
+                  - label: "Texte de l'étape"
+                    name: texte
+                    widget: text
+
+          - label: "Section — Appel à l'action final"
+            name: cta
+            widget: object
+            fields:
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Bouton'
+                name: bouton
+                widget: object
+                fields: *lienFields
+
+      - name: la-zd-theque
+        label: "Page — La ZD'thèque"
+        file: src/content/pages/la-zd-theque.json
+        format: json
+        fields:
+          - label: 'Référencement (Google)'
+            name: seo
+            widget: object
+            hint: "Informations utilisées par les moteurs de recherche et lors du partage sur les réseaux sociaux."
+            fields: *seoFields
+
+          - label: 'Section — Introduction (hero)'
+            name: hero
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Libellé affiché dans le cercle'
+                name: cercleLabel
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte la balise <strong>...</strong>."
+              - label: "Texte du bouton d'appel à l'action"
+                name: ctaLabel
+                widget: string
+                hint: "Accepte &nbsp; pour empêcher un retour à la ligne indésirable."
+
+          - label: 'Section — Ce que nous proposons'
+            name: propositions
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Cartes (exactement 3)'
+                name: cartes
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: *carteIconeFields
+
+          - label: 'Section — Prochaines sessions'
+            name: sessions
+            widget: object
+            hint: "Les dates elles-mêmes se gèrent dans la collection « Sessions ZD'thèque », pas ici."
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte la balise <strong>...</strong>."
+              - label: 'Horaire affiché'
+                name: horaire
+                widget: string
+                hint: "Ex. « Mercredi, à partir de 14h. »"
+              - label: 'Texte du bouton de réservation (par session)'
+                name: labelReservation
+                widget: string
+              - label: 'Carte finale de réservation'
+                name: carteFinale
+                widget: object
+                fields:
+                  - label: 'Surtitre'
+                    name: surtitre
+                    widget: string
+                    hint: "Accepte &nbsp;."
+                  - label: 'Titre'
+                    name: titre
+                    widget: string
+                  - label: 'Texte'
+                    name: texte
+                    widget: string
+                  - label: 'Texte du bouton'
+                    name: bouton
+                    widget: string
+
+          - label: 'Section — Nos ateliers (aperçu)'
+            name: ateliers
+            widget: object
+            hint: "Aperçu de la page « Nos ateliers ». Le catalogue détaillé des ateliers se gère dans la collection « Ateliers (catalogue) »."
+            fields:
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Cartes (exactement 4)'
+                name: cartes
+                widget: list
+                min: 4
+                max: 4
+                hint: "Ce bloc affiche exactement 4 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: *carteIconeFields
+
+          - label: "Section — Appel à l'action final"
+            name: cta
+            widget: object
+            fields:
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Boutons'
+                name: boutons
+                widget: list
+                min: 1
+                hint: "Au moins un bouton requis."
+                fields: *boutonFields
+
+      - name: nos-ateliers
+        label: 'Page — Nos ateliers'
+        file: src/content/pages/nos-ateliers.json
+        format: json
+        fields:
+          - label: 'Référencement (Google)'
+            name: seo
+            widget: object
+            hint: "Informations utilisées par les moteurs de recherche et lors du partage sur les réseaux sociaux."
+            fields: *seoFields
+
+          - label: 'Section — Introduction (hero)'
+            name: hero
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+                hint: "Accepte &nbsp;."
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Libellé affiché dans le cercle'
+                name: cercleLabel
+                widget: string
+                hint: "Un retour à la ligne peut être inséré avec « \\n »."
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte la balise <strong>...</strong>."
+              - label: "Texte du bouton d'appel à l'action"
+                name: ctaLabel
+                widget: string
+
+          - label: 'Section — Le cercle vertueux'
+            name: cercleVertueux
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Cartes (exactement 3)'
+                name: cartes
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: *carteIconeFields
+
+          - label: 'Section — Nos secrets de fabrication'
+            name: transmission
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Cartes (exactement 3)'
+                name: cartes
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: *carteIconeFields
+
+          - label: 'Section — Un atelier pour tous'
+            name: pourTous
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+                hint: "Accepte &nbsp;."
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Cartes (exactement 3)'
+                name: cartes
+                widget: list
+                min: 3
+                max: 3
+                hint: "Ce bloc affiche exactement 3 cartes : impossible d'en ajouter ou d'en supprimer."
+                fields: *carteIconeFields
+
+          - label: 'Section — Catalogue (textes fixes)'
+            name: catalogue
+            widget: object
+            hint: "Textes génériques du catalogue. Les ateliers eux-mêmes se gèrent dans la collection « Ateliers (catalogue) »."
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+              - label: 'Texte du lien « voir le déroulé »'
+                name: labelDeroule
+                widget: string
+              - label: 'Texte du lien « masquer le déroulé »'
+                name: labelDerouleOuvert
+                widget: string
+              - label: 'Titre au-dessus du déroulé'
+                name: titreDeroule
+                widget: string
+              - label: 'Titre au-dessus de « vous repartez avec »'
+                name: titreRepartez
+                widget: string
+              - label: 'Texte du bouton de réservation (par atelier)'
+                name: labelReservation
+                widget: string
+
+          - label: "Section — Appel à l'action final"
+            name: cta
+            widget: object
+            fields:
+              - label: 'Titre'
+                name: titre
+                widget: string
+                hint: "Accepte &nbsp;."
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Texte du bouton'
+                name: labelBouton
+                widget: string
+
+      - name: contact
+        label: 'Page — Contact'
+        file: src/content/pages/contact.json
+        format: json
+        fields:
+          - label: 'Référencement (Google)'
+            name: seo
+            widget: object
+            hint: "Informations utilisées par les moteurs de recherche et lors du partage sur les réseaux sociaux."
+            fields: *seoFields
+
+          - label: 'Section — Introduction (hero)'
+            name: hero
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte &nbsp;."
+
+          - label: 'Section — Formulaire'
+            name: formulaire
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre du formulaire'
+                name: titre
+                widget: string
+              - label: 'Libellé du champ Nom'
+                name: labelNom
+                widget: string
+                hint: "Accepte &amp; (pour afficher « & »)."
+              - label: 'Exemple affiché dans le champ Nom'
+                name: placeholderNom
+                widget: string
+              - label: 'Libellé du champ E-mail'
+                name: labelEmail
+                widget: string
+              - label: 'Exemple affiché dans le champ E-mail'
+                name: placeholderEmail
+                widget: string
+              - label: 'Libellé du champ Sujet'
+                name: labelSujet
+                widget: string
+              - label: 'Libellé du champ Message'
+                name: labelMessage
+                widget: string
+              - label: 'Exemple affiché dans le champ Message'
+                name: placeholderMessage
+                widget: text
+              - label: 'Texte du bouton d''envoi'
+                name: labelBouton
+                widget: string
+              - label: 'Mention « Service Minimum Digital »'
+                name: mentionSmd
+                widget: text
+              - label: 'Liste des sujets proposés'
+                name: sujets
+                widget: list
+                min: 1
+                hint: "Sujets proposés dans le menu déroulant du formulaire. Au moins un requis."
+                field: { label: Sujet, name: value, widget: string }
+              - label: 'Sujet présélectionné depuis la page Le LAB'
+                name: sujetLab
+                widget: string
+                hint: "Doit être rigoureusement identique (même orthographe, mêmes espaces) à l'un des sujets de la liste juste au-dessus. Sinon la mise en ligne du site échouera."
+
+          - label: 'Section — Coordonnées'
+            name: coordonnees
+            widget: object
+            fields:
+              - label: 'Accroche manuscrite'
+                name: kicker
+                widget: string
+              - label: 'Titre de la section'
+                name: titre
+                widget: string
+
+          - label: 'Section — Où nous trouver'
+            name: ouTrouver
+            widget: object
+            fields:
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: text
+                hint: "Accepte du HTML simple, notamment un lien <a href=\"...\">...</a>. Attention à ne pas casser les balises en éditant ce texte."
+
+          - label: 'Section — Encart Le LAB'
+            name: encartLab
+            widget: object
+            fields:
+              - label: 'Titre'
+                name: titre
+                widget: string
+              - label: 'Texte'
+                name: texte
+                widget: string
+              - label: 'Texte du bouton'
+                name: bouton
+                widget: string
+
+  - name: ateliers
+    label: 'Ateliers (catalogue)'
+    label_singular: 'Atelier'
+    folder: src/content/ateliers
+    format: json
+    extension: json
+    create: true
+    slug: '{{fields.ordre}}-{{slug}}'
+    identifier_field: titre
+    sortable_fields: [ordre]
+    fields:
+      - label: "Ordre d'affichage"
+        name: ordre
+        widget: number
+        value_type: int
+        hint: "Détermine l'ordre d'apparition dans le catalogue. Les nombres les plus petits apparaissent en premier."
+      - label: 'Numéro affiché'
+        name: numero
+        widget: string
+        hint: "Ex. « Atelier nº 1 »."
+      - label: 'Titre de l''atelier'
+        name: titre
+        widget: string
+      - label: 'Description'
+        name: description
+        widget: text
+      - label: "Photo de l'atelier"
+        name: image
+        widget: image
+        hint: "L'image est automatiquement enregistrée dans le dossier /uploads du site."
+      - label: "Texte alternatif de l'image (accessibilité)"
+        name: imageAlt
+        widget: string
+        hint: "Obligatoire. C'est le texte lu à voix haute par les lecteurs d'écran pour les personnes non-voyantes. Décrivez simplement ce que montre la photo."
+      - label: 'Côté de la photo'
+        name: cotePhoto
+        widget: select
+        hint: "Sur ordinateur, détermine si la photo apparaît à gauche ou à droite du texte."
+        options:
+          - { label: 'Gauche', value: gauche }
+          - { label: 'Droite', value: droite }
+      - label: 'Étiquettes pratiques'
+        name: tags
+        widget: list
+        min: 1
+        hint: "Ex. « 2 h », « Dès 8 ans », « 1 à 8 participants ». Au moins une étiquette requise."
+        field: { label: Étiquette, name: value, widget: string }
+      - label: 'Ce que les participants repartent avec'
+        name: repartezAvec
+        widget: list
+        min: 1
+        hint: "Une ligne par élément. Au moins un élément requis."
+        field: { label: Élément, name: value, widget: text }
+      - label: "Déroulé de l'atelier (étapes)"
+        name: deroule
+        widget: list
+        min: 1
+        hint: "Au moins une étape requise."
+        fields: *etapeFields
+
+  - name: sessions
+    label: "Sessions ZD'thèque"
+    label_singular: 'Session'
+    folder: src/content/sessions
+    format: json
+    extension: json
+    create: true
+    slug: '{{fields.ordre}}-{{fields.ville}}'
+    identifier_field: ville
+    sortable_fields: [ordre]
+    fields:
+      - label: "Ordre d'affichage"
+        name: ordre
+        widget: number
+        value_type: int
+        hint: "Détermine l'ordre d'apparition dans la liste des sessions. Les nombres les plus petits apparaissent en premier."
+      - label: 'Jour (numéro)'
+        name: jour
+        widget: string
+        hint: "Numéro du jour uniquement, ex. « 29 »."
+      - label: 'Mois et année'
+        name: mois
+        widget: string
+        hint: "Ex. « Sept. 2026 »."
+      - label: 'Lieu'
+        name: lieu
+        widget: string
+        hint: "Ex. « Médiathèque », « Le LAB »."
+      - label: 'Ville'
+        name: ville
+        widget: string
+      - label: 'Lien de réservation spécifique'
+        name: lienReservation
+        widget: string
+        required: false
+        hint: "Facultatif. Si vide, le bouton utilise le lien de réservation général défini dans les Réglages généraux. Si renseigné, doit être une URL complète (https://…)."
+        pattern: ['^https?://', 'Doit commencer par http:// ou https://.']
