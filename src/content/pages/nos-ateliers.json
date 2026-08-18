@@ -1,0 +1,57 @@
+{
+  "seo": {
+    "titre": "Nos ateliers cosmétiques — Créez vos soins au naturel | Les Daronnes en Nord",
+    "description": "Ateliers cosmétiques à Lys-lez-Lannoy : cosmétiques solides, rouges à lèvres et crème de jour faits maison avec Audrey. Repartez avec vos créations et vos recettes."
+  },
+  "hero": {
+    "kicker": "Formulez au naturel&nbsp;!",
+    "titre": "Nos ateliers artisans",
+    "cercleLabel": "Nos ateliers\nartisans",
+    "texte": "Envie de découvrir un savoir-faire, de vous initier à une pratique et de passer un moment unique. <strong>Glissez-vous dans la peau d'un artisan</strong> le temps d'un atelier&nbsp;!",
+    "ctaLabel": "Réserver un atelier"
+  },
+  "cercleVertueux": {
+    "kicker": "Un achat plaisir, un acte solidaire",
+    "titre": "Le cercle vertueux des Daronnes",
+    "texte": "Nous croyons en une écologie accessible à tous. Pour que le budget ne soit jamais un frein, nous avons mis en place un modèle économique circulaire et solidaire.",
+    "cartes": [
+      { "icone": "pro", "titre": "Les prestations pro", "texte": "Team-buildings, formations de créateurs via Le LAB et ateliers payants grand public — une expertise de haut niveau." },
+      { "icone": "cycle", "titre": "Le cercle vertueux", "texte": "Ces revenus financent les matières premières, l'entretien du local, nos activités bénévoles et la vie de l'association." },
+      { "icone": "impact", "titre": "L'impact social", "texte": "En choisissant nos prestations payantes, vous devenez acteur direct de la transition et de la solidarité sur notre territoire." }
+    ]
+  },
+  "transmission": {
+    "kicker": "Repartez autonome",
+    "titre": "Nos secrets de fabrication, transmis",
+    "texte": "On vous transmet nos recettes pour créer des produits sains, efficaces et zéro déchet. Vous repartez avec vos créations personnalisées et toutes les clés pour recommencer chez vous.",
+    "cartes": [
+      { "icone": "cosmetique", "titre": "Vos créations", "texte": "Vous repartez avec vos produits faits maison, personnalisés selon votre peau et vos envies." },
+      { "icone": "recette", "titre": "Les fiches recettes", "texte": "Au format SMD ultra-léger, pour refaire vos recettes sans surcharge numérique." },
+      { "icone": "cle", "titre": "Les clés de l'autonomie", "texte": "Gestes, dosages et bons réflexes pour continuer en toute autonomie, à la maison." }
+    ]
+  },
+  "pourTous": {
+    "kicker": "Oui, absolument tous&nbsp;!",
+    "titre": "Un atelier pour tous",
+    "texte": "Nos ateliers sont des espaces de partage bienveillants où chacun trouve sa place.",
+    "cartes": [
+      { "icone": "famille", "titre": "De 7 à 107 ans", "texte": "Des formats ludiques en famille pour les petits, et des sessions pour approfondir pour les grands." },
+      { "icone": "genre", "titre": "Femmes ET hommes", "texte": "Prendre soin de soi n'a pas de genre : baumes à barbe, déodorants solides, soins du visage…" },
+      { "icone": "niveau", "titre": "Du novice à l'expert", "texte": "Jamais touché une balance de précision ? On reprend les bases. Déjà initié ? On vous challenge." }
+    ]
+  },
+  "catalogue": {
+    "kicker": "Nos ateliers à la carte",
+    "titre": "Choisissez votre atelier",
+    "labelDeroule": "Voir le déroulé de l'atelier",
+    "labelDerouleOuvert": "Masquer le déroulé",
+    "titreDeroule": "Le déroulé de l'atelier",
+    "titreRepartez": "Vous repartez avec",
+    "labelReservation": "Réserver cet atelier"
+  },
+  "cta": {
+    "titre": "Prêt(e) à formuler avec nous&nbsp;?",
+    "texte": "Réservez votre atelier cosmétique ou parlez-nous de votre projet de team-building.",
+    "labelBouton": "Réserver un atelier"
+  }
+}

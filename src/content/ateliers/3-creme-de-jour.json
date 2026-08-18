@@ -1,0 +1,20 @@
+{
+  "ordre": 3,
+  "numero": "Atelier nº 3",
+  "titre": "Créez votre crème de jour",
+  "description": "Plongez dans l'univers naturel et bienveillant d'Audrey, fabricante de cosmétiques. Entrez dans le monde fascinant de la fabrication de cosmétiques et composez votre propre crème de jour, sur mesure.",
+  "image": "/uploads/atelier-creme-de-jour.webp",
+  "imageAlt": "Fabrication d'une crème de jour naturelle en atelier",
+  "cotePhoto": "gauche",
+  "tags": ["2 h", "Dès 8 ans", "1 à 8 participants", "Jusqu'à 20 en privatisation"],
+  "repartezAvec": [
+    "2 h de découverte avec Audrey pour réaliser 2 crèmes de jour",
+    "Des connaissances en fabrication de cosmétiques",
+    "Votre crème de jour naturelle et sur mesure"
+  ],
+  "deroule": [
+    { "numero": "01", "titre": "Accueil & introduction", "texte": "Audrey présente les ingrédients, leurs rôles et leurs bienfaits, et comment les associer : crème de jour, de nuit, lait corps, soin des mains… Des recettes pour tous, femmes comme hommes, selon votre type de peau." },
+    { "numero": "02", "titre": "Réalisation", "texte": "Réalisez deux produits de 50 ml, en choisissant parmi une grande variété de principes actifs : vitamine E, acide hyaluronique, coenzyme Q10…" },
+    { "numero": "03", "titre": "Fragrances & poudres", "texte": "Sélectionnez vos fragrances et poudres minérales pour la texture et le parfum idéal. Repartez avec vos cosmétiques, vos recettes et l'envie de continuer chez vous." }
+  ]
+}

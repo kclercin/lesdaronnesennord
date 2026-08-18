@@ -15,4 +15,27 @@ const sessions = defineCollection({
   }),
 })
 
-export const collections = { sessions }
+const ateliers = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/ateliers' }),
+  schema: z.object({
+    ordre: z.number(),
+    numero: z.string().min(1),
+    titre: z.string().min(1),
+    description: z.string().min(1),
+    image: z.string().startsWith('/uploads/'),
+    /** Obligatoire : un alt vide passerait inaperçu au CMS mais casserait l'accessibilité. */
+    imageAlt: z.string().min(1),
+    cotePhoto: z.enum(['gauche', 'droite']),
+    tags: z.array(z.string().min(1)).min(1),
+    repartezAvec: z.array(z.string().min(1)).min(1),
+    deroule: z.array(
+      z.object({
+        numero: z.string().min(1),
+        titre: z.string().min(1),
+        texte: z.string().min(1),
+      })
+    ).min(1),
+  }),
+})
+
+export const collections = { sessions, ateliers }

@@ -1,0 +1,21 @@
+{
+  "ordre": 1,
+  "numero": "Atelier nº 1",
+  "titre": "Créez vos cosmétiques solides",
+  "description": "Découvrez la cosmétique home made, naturelle et écoresponsable en compagnie d'Audrey, créatrice de cosmétiques naturels. Elle vous ouvre les portes de son charmant atelier, où vous concevez vos propres soins solides.",
+  "image": "/uploads/atelier-cosmetiques-solides.webp",
+  "imageAlt": "Atelier de fabrication de cosmétiques solides avec Audrey",
+  "cotePhoto": "gauche",
+  "tags": ["2 h", "Dès 8 ans", "1 à 8 participants", "Jusqu'à 20 en privatisation"],
+  "repartezAvec": [
+    "2 h de découverte avec Audrey pour réaliser 2 cosmétiques solides",
+    "Des connaissances en fabrication de cosmétiques",
+    "Votre duo de cosmétiques solides personnalisés"
+  ],
+  "deroule": [
+    { "numero": "01", "titre": "Accueil & introduction", "texte": "Audrey vous présente les ingrédients naturels — kératine végétale, poudres de plantes, huiles, beurres, fragrances — leurs rôles et leurs vertus." },
+    { "numero": "02", "titre": "Choix des recettes", "texte": "Sélectionnez deux produits parmi shampoing, après-shampoing, dentifrice, déodorant, démaquillant, baume corporel ou savon. Audrey vous aide à personnaliser votre formule." },
+    { "numero": "03", "titre": "Fabrication", "texte": "Testez, mesurez, mélangez et ajustez vos ingrédients jusqu'à une recette qui vous ressemble : parfum, texture, propriétés." },
+    { "numero": "04", "titre": "Finalisation & échanges", "texte": "Recevez un livret pédagogique numérique avec les recettes, puis échangez autour d'une boisson. Repartez avec vos deux cosmétiques solides." }
+  ]
+}
