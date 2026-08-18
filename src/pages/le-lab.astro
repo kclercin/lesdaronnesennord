@@ -1,13 +1,12 @@
 ---
-import { getEntry } from 'astro:content'
 import Layout from '../components/Layout.astro'
 import LogoCircle from '../components/icons/LogoCircle.astro'
 import Sparkle from '../components/icons/Sparkle.astro'
 import { ICONES } from '../components/icons'
 
-const entree = await getEntry('pages', 'le-lab')
-if (!entree) throw new Error("Contenu introuvable : src/content/pages/le-lab.json")
-const { seo, hero, pourQui, accompagnement, cta } = entree.data
+import { leLab } from '../lib/pages/le-lab'
+
+const { seo, hero, pourQui, accompagnement, cta } = leLab
 
 const RAYONS = [
   '240px 18px 220px 18px / 18px 220px 18px 240px',
