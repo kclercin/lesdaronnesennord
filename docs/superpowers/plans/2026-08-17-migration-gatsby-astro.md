@@ -198,9 +198,13 @@ Nouveau contenu de `.gitignore` :
 ```
 node_modules/
 dist/
+.astro/
 .gstack/
 .vscode/
 ```
+
+> `.astro/` est le cache de types régénéré par chaque `astro build` / `astro dev`.
+> Sans cette ligne, les `git add -A` des tâches suivantes le committeraient.
 
 - [ ] **Step 2: Installer Astro et retirer Gatsby + Tailwind**
 
@@ -539,8 +543,18 @@ body {
 npm run build
 ```
 
-Expected: échec avec `Missing pages directory` ou équivalent — `src/pages/` ne contient encore
-que des `.tsx` que Astro ignore. C'est le résultat attendu à ce stade.
+Expected: **succès avec avertissements** (code de sortie 0), et `dist/` vide :
+
+```
+[WARN] Unsupported file type .../src/pages/index.tsx found in pages directory.
+[WARN] [@astrojs/sitemap] No pages found! `sitemap-index.xml` not created.
+[build] 0 page(s) built
+```
+
+Astro 7 traite l'absence de page comme un avertissement, pas une erreur. `src/pages/` ne contient
+encore que des `.tsx`, qu'Astro ignore — les pages arrivent en tâches 5 à 9.
+Si le build échoue pour une **autre** raison (syntaxe CSS, module introuvable), c'est un vrai
+problème à corriger.
 
 - [ ] **Step 8: Commit**
 
