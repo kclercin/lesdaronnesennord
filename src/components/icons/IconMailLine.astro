@@ -1,0 +1,14 @@
+---
+// src/components/icons/IconMailLine.astro
+import { s, GOLD } from './_stroke'
+
+interface Props {
+  size?: number
+}
+const { size = 22 } = Astro.props
+---
+
+<svg width={size} height={size} viewBox="0 0 32 32">
+  <rect x={4} y={7} width={24} height={18} rx={3} {...s(2.2, GOLD)} />
+  <path d="M5 9 16 18 27 9" {...s(2.2, GOLD)} />
+</svg>

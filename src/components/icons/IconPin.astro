@@ -1,0 +1,17 @@
+---
+// src/components/icons/IconPin.astro
+import { s, GOLD } from './_stroke'
+
+interface Props {
+  size?: number
+}
+const { size = 22 } = Astro.props
+---
+
+<svg width={size} height={size} viewBox="0 0 32 32">
+  <path
+    d="M16 28 c7 -8 10 -13 10 -18 a10 10 0 1 0 -20 0 c0 5 3 10 10 18 Z"
+    {...s(2.2, GOLD)}
+  />
+  <circle cx={16} cy={11} r={3.5} {...s(2.2, GOLD)} />
+</svg>

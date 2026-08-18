@@ -1,0 +1,20 @@
+---
+// src/components/icons/Sparkle.astro
+import { GOLD } from './_stroke'
+
+interface Props {
+  size?: number
+  color?: string
+}
+const { size = 26, color = GOLD } = Astro.props
+---
+
+<svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+  <path
+    d="M2.6 8.2 6.7 11.6 12 3.8 17.3 11.6 21.4 8.2 19.6 19.4 4.4 19.4 2.6 8.2Z"
+    fill={color}
+  />
+  <circle cx={2.6} cy={7} r={1.5} fill={color} />
+  <circle cx={12} cy={2.4} r={1.5} fill={color} />
+  <circle cx={21.4} cy={7} r={1.5} fill={color} />
+</svg>

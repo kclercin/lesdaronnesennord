@@ -1,0 +1,12 @@
+---
+// src/components/icons/Logo.astro
+import { Image } from 'astro:assets'
+import logo from '../../images/logo-daronnes.png'
+
+interface Props {
+  height?: number
+}
+const { height = 54 } = Astro.props
+---
+
+<Image src={logo} alt="Les Daronnes en Nord" height={height} style="display:block;width:auto" />
