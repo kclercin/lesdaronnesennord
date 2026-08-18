@@ -1,0 +1,350 @@
+---
+import Layout from '../components/Layout.astro'
+import Sparkle from '../components/icons/Sparkle.astro'
+import IconMailLine from '../components/icons/IconMailLine.astro'
+import IconGlobe from '../components/icons/IconGlobe.astro'
+import IconPin from '../components/icons/IconPin.astro'
+import { site } from '../lib/site'
+import { contact } from '../lib/pages/contact'
+
+const { seo, hero, formulaire, coordonnees, ouTrouver, encartLab } = contact
+
+const siteDomaine = site.siteUrl.replace(/^https?:\/\//, '')
+---
+
+<Layout titre={seo.titre} description={seo.description} active="contact">
+  <section class="hero">
+    <div class="hero-halo"></div>
+    <div class="hero-inner">
+      <div class="hero-kicker">
+        <Sparkle size={26} color="#E8BE36" />
+        {hero.kicker}
+      </div>
+      <h1 class="hero-titre">{hero.titre}</h1>
+      <p class="hero-texte" set:html={hero.texte} />
+    </div>
+  </section>
+
+  <section class="contenu">
+    <div class="contenu-grille">
+      <form id="form" class="formulaire">
+        <div class="formulaire-kicker">{formulaire.kicker}</div>
+        <h2 class="formulaire-titre">{formulaire.titre}</h2>
+
+        <div class="formulaire-grille">
+          <label class="champ">
+            <span set:html={formulaire.labelNom} />
+            <input class="rc-inp" type="text" name="name" placeholder={formulaire.placeholderNom} required />
+          </label>
+          <label class="champ">
+            {formulaire.labelEmail}
+            <input class="rc-inp" type="email" name="email" placeholder={formulaire.placeholderEmail} required />
+          </label>
+        </div>
+
+        <label class="champ champ-espace">
+          {formulaire.labelSujet}
+          <select class="rc-inp" name="subject">
+            {formulaire.sujets.map((s) => <option value={s}>{s}</option>)}
+          </select>
+        </label>
+
+        <label class="champ champ-espace">
+          {formulaire.labelMessage}
+          <textarea
+            class="rc-inp champ-message"
+            name="message"
+            rows={5}
+            placeholder={formulaire.placeholderMessage}
+            required
+          ></textarea>
+        </label>
+
+        <button type="submit" class="dc-btn dc-btn-dark bouton-envoyer">{formulaire.labelBouton}</button>
+        <p class="formulaire-mention">{formulaire.mentionSmd}</p>
+      </form>
+
+      <aside class="infos">
+        <div class="coordonnees">
+          <div class="coordonnees-sparkle">
+            <Sparkle size={96} color="rgba(232,190,54,.5)" />
+          </div>
+          <div class="coordonnees-kicker">{coordonnees.kicker}</div>
+          <h3 class="coordonnees-titre">{coordonnees.titre}</h3>
+          <a href={`mailto:${site.email}`} class="coordonnees-lien">
+            <IconMailLine /> {site.email}
+          </a>
+          <a href={site.siteUrl} class="coordonnees-lien">
+            <IconGlobe /> {siteDomaine}
+          </a>
+          <div class="coordonnees-lien coordonnees-zone">
+            <IconPin /> {site.zone}
+          </div>
+        </div>
+
+        <div class="ou-trouver">
+          <div class="ou-trouver-titre">{ouTrouver.titre}</div>
+          <p class="ou-trouver-texte" set:html={ouTrouver.texte} />
+        </div>
+
+        <div class="encart-lab">
+          <div class="encart-lab-titre">{encartLab.titre}</div>
+          <p class="encart-lab-texte">{encartLab.texte}</p>
+          <a id="cta-lab" href="#form" class="dc-btn dc-btn-dark encart-lab-bouton">{encartLab.bouton}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ email: site.email, sujetLab: formulaire.sujetLab }}>
+  const form = document.querySelector('#form')
+  const select = form.elements.namedItem('subject')
+
+  // pré-sélection depuis /contact?sujet=lab ou #lab (liens venant de la page Le LAB)
+  const param = new URLSearchParams(location.search).get('sujet')
+  if (param === 'lab' || location.hash.includes('lab')) select.value = sujetLab
+
+  document.querySelector('#cta-lab')?.addEventListener('click', () => {
+    select.value = sujetLab
+  })
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const fd = new FormData(form)
+    const nom = fd.get('name') ?? ''
+    const mail = fd.get('email') ?? ''
+    const message = fd.get('message') ?? ''
+    const corps = `Bonjour Les Daronnes,\n\n${message}\n\n— ${nom}${mail ? ` (${mail})` : ''}`
+    location.href =
+      `mailto:${email}?subject=${encodeURIComponent(`[${select.value}] ${nom}`)}` +
+      `&body=${encodeURIComponent(corps)}`
+  })
+</script>
+
+<style>
+  /* ===================== HERO ===================== */
+  .hero {
+    position: relative;
+    padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 56px) clamp(8px, 2vw, 24px);
+    text-align: center;
+  }
+  .hero-halo {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: min(640px, 80vw);
+    height: min(520px, 70vw);
+    background: radial-gradient(circle, rgba(214, 178, 52, 0.32), rgba(214, 178, 52, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--manuscrit);
+    font-size: 32px;
+    color: var(--or-fonce);
+    transform: rotate(-2deg);
+  }
+  .hero-titre {
+    margin: 10px 0 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(46px, 8vw, 86px);
+    line-height: 0.92;
+    letter-spacing: 0.5px;
+  }
+  .hero-texte {
+    margin: 18px auto 0;
+    max-width: 44ch;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--texte);
+  }
+
+  /* ===================== FORM + INFOS ===================== */
+  .contenu {
+    padding: clamp(24px, 4vw, 48px) clamp(20px, 5vw, 56px) clamp(48px, 6vw, 90px);
+  }
+  .contenu-grille {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: clamp(28px, 5vw, 52px);
+    align-items: start;
+  }
+
+  .formulaire {
+    background: var(--blanc);
+    border: 2.5px solid var(--encre);
+    border-radius: 28px;
+    padding: clamp(24px, 3.5vw, 40px);
+    box-shadow: 0 26px 56px -36px rgba(27, 26, 23, 0.6);
+  }
+  .formulaire-kicker {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+    color: var(--or);
+  }
+  .formulaire-titre {
+    margin: 8px 0 22px;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 1;
+  }
+  .formulaire-grille {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .champ {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .champ-espace {
+    margin-top: 16px;
+  }
+  .champ-message {
+    resize: vertical;
+    min-height: 130px;
+  }
+  .bouton-envoyer {
+    margin-top: 22px;
+    width: 100%;
+    font-size: 16px;
+    padding: 16px 24px;
+  }
+  .formulaire-mention {
+    margin: 14px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--texte-doux);
+    text-align: center;
+  }
+
+  .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .coordonnees {
+    background: var(--encre);
+    color: var(--creme);
+    border-radius: 24px;
+    padding: 28px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .coordonnees-sparkle {
+    position: absolute;
+    top: -16px;
+    right: -10px;
+    --r: 8deg;
+    animation: floaty 7s ease-in-out infinite;
+  }
+  .coordonnees-kicker {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    color: var(--or-clair);
+  }
+  .coordonnees-titre {
+    margin: 8px 0 18px;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+  }
+  .coordonnees-lien {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--creme);
+    font-size: 15px;
+    padding: 8px 0;
+  }
+  .coordonnees-zone {
+    /* alpha .82 sur la crème : ne correspond à aucun token (.72/.78/.80 seulement) */
+    color: rgba(251, 246, 233, 0.82);
+  }
+
+  .ou-trouver {
+    background: var(--blanc);
+    border: 2px solid var(--encre);
+    border-radius: 24px;
+    padding: 26px;
+  }
+  .ou-trouver-titre {
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--or-fonce);
+    line-height: 1;
+  }
+  .ou-trouver-texte {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--texte);
+  }
+  .ou-trouver-texte :global(a) {
+    /* teinte propre à ce lien, sans équivalent dans tokens.css */
+    color: #8a6c12;
+    font-weight: 600;
+  }
+
+  .encart-lab {
+    /* deuxième teinte du dégradé absente de tokens.css — la plus proche (--or-sombre) diffère (#C49C22) */
+    background: linear-gradient(150deg, var(--or-doux), #c09a20);
+    border-radius: 24px;
+    padding: 24px 26px;
+  }
+  .encart-lab-titre {
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--encre);
+    line-height: 1;
+  }
+  .encart-lab-texte {
+    margin: 10px 0 16px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--texte-or);
+  }
+  .encart-lab-bouton {
+    display: inline-block;
+    font-size: 14px;
+    padding: 11px 20px;
+    border-radius: 40px;
+  }
+
+  @media (max-width: 860px) {
+    .contenu-grille {
+      grid-template-columns: 1fr;
+    }
+    .formulaire-grille {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,45 @@
+{
+  "seo": {
+    "titre": "Contact — Les Daronnes en Nord",
+    "description": "Une question, une envie d'atelier, un projet à monter ensemble ? Écrivez aux Daronnes en Nord — ateliers cosmétiques et zéro déchet dans la métropole lilloise."
+  },
+  "hero": {
+    "kicker": "Faisons connaissance",
+    "titre": "Contact",
+    "texte": "Une question, une envie d'atelier, un projet à monter ensemble&nbsp;? Écrivez-nous — on répond avec plaisir, sans langue de bois."
+  },
+  "formulaire": {
+    "kicker": "Écrivez-nous",
+    "titre": "Votre message",
+    "labelNom": "Prénom &amp; nom",
+    "placeholderNom": "Camille Dupont",
+    "labelEmail": "E-mail",
+    "placeholderEmail": "camille@email.fr",
+    "labelSujet": "Votre demande concerne",
+    "labelMessage": "Votre message",
+    "placeholderMessage": "Dites-nous tout : votre projet, vos dates, le nombre de participants…",
+    "labelBouton": "Envoyer mon message",
+    "mentionSmd": "En cohérence avec notre démarche SMD, on privilégie un échange simple et direct — pas de formulaires à rallonge.",
+    "sujets": [
+      "Un atelier grand public",
+      "Une réservation ZD'thèque",
+      "Le LAB (artisans & créateurs)",
+      "Un atelier privé / sur-mesure",
+      "Autre / question générale"
+    ],
+    "sujetLab": "Le LAB (artisans & créateurs)"
+  },
+  "coordonnees": {
+    "kicker": "Nous joindre",
+    "titre": "Directement"
+  },
+  "ouTrouver": {
+    "titre": "Où nous trouver ?",
+    "texte": "Nos ateliers tournent entre Villeneuve-d'Ascq, Lys-lez-Lannoy, Lille et Roubaix. Le calendrier complet est sur la page <a href=\"/la-zd-theque#sessions\">Nos activités</a>."
+  },
+  "encartLab": {
+    "titre": "Vous êtes artisan ?",
+    "texte": "Le LAB vous accompagne pour concevoir et animer vos propres ateliers.",
+    "bouton": "Parler du LAB"
+  }
+}
