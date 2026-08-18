@@ -1,0 +1,36 @@
+:root {
+  /* couleurs */
+  --creme: #fbf6e9;
+  --encre: #1b1a17;
+  --encre-clair: #332f1f;
+  --blanc: #ffffff;
+  --or: #c9a227;
+  --or-clair: #e8be36;
+  --or-fonce: #b8911e;
+  --or-doux: #d8b43a;
+  --or-sombre: #c49c22;
+  --texte: #4a463c;
+  --texte-doux: #6b675c;
+  --texte-or: #4a3c10;
+
+  /* transparences récurrentes */
+  --encre-08: rgba(27, 26, 23, 0.08);
+  --encre-12: rgba(27, 26, 23, 0.12);
+  --encre-14: rgba(27, 26, 23, 0.14);
+  --creme-50: rgba(251, 246, 233, 0.5);
+  --creme-66: rgba(251, 246, 233, 0.66);
+  --creme-72: rgba(251, 246, 233, 0.72);
+  --creme-78: rgba(251, 246, 233, 0.78);
+  --creme-80: rgba(251, 246, 233, 0.8);
+  --or-40: rgba(232, 190, 54, 0.4);
+  --or-06: rgba(232, 190, 54, 0.06);
+
+  /* typographie */
+  --display: "Anton", sans-serif;
+  --manuscrit: "Caveat", cursive;
+  --corps: "Poppins", sans-serif;
+}
+
+/* Breakpoint unique du site : 860px.
+   Répété littéralement dans chaque composant — les custom properties
+   ne fonctionnent pas dans les conditions de media query. */

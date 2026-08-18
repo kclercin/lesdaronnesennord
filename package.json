@@ -1,40 +1,21 @@
 {
   "name": "les-daronnes-en-nord",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "les-daronnes-en-nord",
+  "type": "module",
+  "description": "Site de l'association Les Daronnes en Nord",
   "author": "Kevin Clercin",
-  "keywords": [
-    "gatsby"
-  ],
+  "engines": { "node": ">=22.12.0" },
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "serve dist --listen tcp://0.0.0.0:$PORT --no-clipboard",
+    "typecheck": "astro check"
   },
   "dependencies": {
-    "autoprefixer": "^10.5.2",
-    "gatsby": "^5.14.6",
-    "gatsby-plugin-image": "^3.16.0",
-    "gatsby-plugin-postcss": "^6.16.0",
-    "gatsby-plugin-sharp": "^5.16.0",
-    "gatsby-plugin-sitemap": "^6.16.0",
-    "gatsby-source-filesystem": "^5.16.0",
-    "gatsby-transformer-remark": "^6.16.0",
-    "gatsby-transformer-sharp": "^5.16.0",
-    "postcss": "^8.5.16",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^4.3.2"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.2",
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "typescript": "^5.3.3"
+    "@astrojs/sitemap": "^3",
+    "astro": "^7",
+    "serve": "^14"
   }
 }
