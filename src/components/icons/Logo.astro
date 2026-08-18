@@ -6,8 +6,8 @@ interface Props {
   height?: number
   /**
    * true pour le logo du header : il est au-dessus de la ligne de flottaison.
-   * astro:assets pose `loading="lazy"` par défaut, ce qui lui donne une priorité
-   * basse et retarde son affichage — Gatsby le chargeait en priorité normale.
+   * `astro:assets` pose `loading="lazy"` par défaut, ce qui donne une priorité
+   * basse à l'image la plus urgente de la page et retarde son affichage.
    */
   prioritaire?: boolean
 }
