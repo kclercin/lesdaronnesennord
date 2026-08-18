@@ -33,15 +33,75 @@ Sveltia écrit alors directement dans les fichiers du dossier, sans passer par G
 
 ## 2. Créer l'application Dokploy
 
-1. **Nouvelle application** → source : dépôt GitHub `kclercin/lesdaronnesennord`, branche `master`
-2. **Build type** : *Heroku buildpacks* (version 24)
-   Le buildpack Node exécute `npm ci` puis `npm run build` ; le buildpack Procfile lit le `Procfile`
-   à la racine, qui lance `serve dist` sur `$PORT`.
-3. **Domaine** : `lesdaronnesennord.fr` + certificat Let's Encrypt
-4. **Redirection canonique** : ajouter dans Traefik une règle `www.lesdaronnesennord.fr` →
-   `lesdaronnesennord.fr` en 301. Elle n'est **pas** dans le code, pour que le même build reste
-   déployable ailleurs.
-5. **Webhook GitHub** : activer le redéploiement automatique sur `master`
+### Créer l'application
+
+1. **Create Application** → nom : `daronnes-site`
+2. **Provider** : GitHub → dépôt `kclercin/lesdaronnesennord` → branche `master`
+   (ou `astro` si tu veux tester avant de fusionner)
+
+### Build
+
+Onglet **Build Type** → **Heroku Buildpacks**, version **24** (valeur par défaut).
+
+Aucune commande à saisir : le buildpack Node détecte `package.json`, exécute `npm ci`
+puis `npm run build`, et le buildpack Procfile lit le `Procfile` à la racine.
+
+> `astro` et `serve` sont volontairement en `dependencies` et non en `devDependencies` :
+> les buildpacks élaguent les devDependencies, et le conteneur démarrerait puis mourrait
+> sans message clair.
+
+### Port
+
+**3000.**
+
+Le `Procfile` écoute sur `${PORT:-3000}` : il utilise la variable `PORT` si Dokploy l'injecte,
+et retombe sur 3000 sinon. Renseigne **3000** comme port du conteneur au moment de créer le
+domaine — sauf si tu définis explicitement une variable d'environnement `PORT`, auquel cas
+mets la même valeur des deux côtés.
+
+### Domaine
+
+Onglet **Domains** → **Add Domain** :
+
+| Champ | Valeur |
+|---|---|
+| Host | `lesdaronnesennord.fr` |
+| Path | `/` |
+| Container Port | `3000` |
+| HTTPS | activé |
+| Certificate | Let's Encrypt |
+
+Ajoute un **second domaine** identique pour `www.lesdaronnesennord.fr` — sans lui, Traefik
+ne répondrait pas du tout sur le `www` et la redirection ci-dessous ne pourrait pas s'appliquer.
+
+### Redirection www → apex
+
+Onglet **Advanced** → **Redirects** → **Add Redirect** :
+
+| Champ | Valeur |
+|---|---|
+| Regex | `^https://www\.lesdaronnesennord\.fr/(.*)` |
+| Replacement | `https://lesdaronnesennord.fr/$1` |
+| Permanent | activé (301) |
+
+Cette règle est volontairement **hors du code** : le même build reste ainsi déployable
+ailleurs sans modification (c'est `netlify.toml` qui porte l'équivalent côté Netlify).
+
+### DNS
+
+Chez OVH, faire pointer les deux enregistrements vers l'IP du serveur Dokploy :
+
+| Type | Nom | Valeur |
+|---|---|---|
+| A | `@` | IP du serveur |
+| A (ou CNAME) | `www` | IP du serveur (ou `lesdaronnesennord.fr.`) |
+
+Attendre la propagation avant de demander le certificat Let's Encrypt, sinon la validation échoue.
+
+### Déploiement automatique
+
+Onglet **Deployments** → activer le **webhook GitHub**, puis coller l'URL fournie dans
+GitHub → *Settings* → *Webhooks*. Chaque fusion sur `master` déclenchera un déploiement.
 
 ### Vérifier après le premier déploiement
 
@@ -52,12 +112,23 @@ for u in / /le-lab /la-zd-theque /nos-ateliers /contact /admin/; do
 done
 curl -s -o /dev/null -w '404 -> %{http_code}\n' $D/page-inexistante
 curl -sI $D/ | grep -i cache-control
+curl -s -o /dev/null -w 'www -> %{http_code} %{redirect_url}\n' https://www.lesdaronnesennord.fr/
 ```
 
-Attendu : 200 partout, 404 sur la page inexistante (avec la page 404 du site),
-`must-revalidate` sur le HTML.
+Attendu :
+- 200 sur les 6 routes
+- 404 sur la page inexistante, **avec la page 404 du site** (pas celle de Traefik)
+- `must-revalidate` sur le HTML
+- 301 depuis `www` vers l'apex
 
----
+### Si le déploiement échoue
+
+| Symptôme | Cause probable |
+|---|---|
+| Build en échec sur `astro: not found` | `astro` est passé en `devDependencies` |
+| Conteneur qui démarre puis s'arrête | `serve` est passé en `devDependencies` |
+| 502 Bad Gateway | port du domaine ≠ port d'écoute réel (doit être 3000) |
+| Build en échec avec un message Zod | un champ de contenu est invalide — le message indique lequel |
 
 ## 3. Vérifier la boucle d'édition complète
 

@@ -5,12 +5,14 @@
   "type": "module",
   "description": "Site de l'association Les Daronnes en Nord",
   "author": "Kevin Clercin",
-  "engines": { "node": ">=22.12.0" },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "serve dist --listen tcp://0.0.0.0:$PORT --no-clipboard",
+    "start": "serve dist --listen tcp://0.0.0.0:${PORT:-3000} --no-clipboard",
     "typecheck": "astro check"
   },
   "dependencies": {
