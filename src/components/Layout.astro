@@ -34,14 +34,21 @@ const { titre, description, active = '' } = Astro.props
     />
   </head>
   <body>
-    <SiteHeader active={active} />
-    <slot />
-    <SiteFooter />
+    <div class="page">
+      <SiteHeader active={active} />
+      <slot />
+      <SiteFooter />
+    </div>
   </body>
 </html>
 
 <style>
-  body {
+  /* Conteneur repris à l'identique de l'ancien Layout.tsx.
+     Il doit rester un <div> et non le <body> : `overflow-x: hidden` sur un
+     élément crée un contexte de défilement qui neutralise le `position: sticky`
+     du header. Porté sur `body`, l'overflow est propagé au viewport et le header
+     se met à coller — ce que le site ne faisait pas. */
+  .page {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
