@@ -1,12 +1,23 @@
 ---
-// src/components/icons/Logo.astro
 import { Image } from 'astro:assets'
 import logo from '../../images/logo-daronnes.png'
 
 interface Props {
   height?: number
+  /**
+   * true pour le logo du header : il est au-dessus de la ligne de flottaison.
+   * astro:assets pose `loading="lazy"` par défaut, ce qui lui donne une priorité
+   * basse et retarde son affichage — Gatsby le chargeait en priorité normale.
+   */
+  prioritaire?: boolean
 }
-const { height = 54 } = Astro.props
+const { height = 54, prioritaire = false } = Astro.props
 ---
 
-<Image src={logo} alt="Les Daronnes en Nord" height={height} style="display:block;width:auto" />
+<Image
+  src={logo}
+  alt="Les Daronnes en Nord"
+  height={height}
+  loading={prioritaire ? 'eager' : 'lazy'}
+  style="display:block;width:auto"
+/>
