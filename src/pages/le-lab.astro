@@ -1,0 +1,357 @@
+---
+import { getEntry } from 'astro:content'
+import Layout from '../components/Layout.astro'
+import LogoCircle from '../components/icons/LogoCircle.astro'
+import Sparkle from '../components/icons/Sparkle.astro'
+import { ICONES } from '../components/icons'
+
+const entree = await getEntry('pages', 'le-lab')
+if (!entree) throw new Error("Contenu introuvable : src/content/pages/le-lab.json")
+const { seo, hero, pourQui, accompagnement, cta } = entree.data
+
+const RAYONS = [
+  '240px 18px 220px 18px / 18px 220px 18px 240px',
+  '18px 220px 18px 240px / 240px 18px 220px 18px',
+  '220px 18px 240px 18px / 18px 240px 18px 220px',
+]
+---
+
+<Layout titre={seo.titre} description={seo.description} active="lab">
+  <section class="hero">
+    <div class="hero-grille">
+      <div class="hero-logo-wrap">
+        <LogoCircle label={hero.cercleLabel} fontSize={30} color="#1B1A17" />
+      </div>
+      <div>
+        <div class="hero-kicker">{hero.kicker}</div>
+        <h1 class="hero-titre">{hero.titre}</h1>
+        <p class="hero-texte" set:html={hero.texte} />
+        <a href={hero.cta.href} class="dc-btn dc-btn-dark hero-cta" set:html={hero.cta.label} />
+      </div>
+    </div>
+  </section>
+
+  <section class="pour-qui">
+    <div class="pour-qui-conteneur">
+      <div class="pour-qui-entete">
+        <div class="pour-qui-kicker" set:html={pourQui.kicker} />
+        <h2 class="pour-qui-titre">{pourQui.titre}</h2>
+      </div>
+      <div class="pour-qui-grille">
+        {pourQui.cartes.map((carte, i) => {
+          const Icone = ICONES[carte.icone]
+          return (
+            <article class="carte" style={`border-radius:${RAYONS[i]}`}>
+              <div class="carte-icone"><Icone /></div>
+              <h3 class="carte-titre">{carte.titre}</h3>
+              <p class="carte-texte">{carte.texte}</p>
+            </article>
+          )
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="accompagnement">
+    <div class="accompagnement-sparkle">
+      <Sparkle size={96} color="rgba(232,190,54,.5)" />
+    </div>
+    <div class="accompagnement-conteneur">
+      <div class="accompagnement-intro">
+        <div class="accompagnement-kicker">{accompagnement.kicker}</div>
+        <h2 class="accompagnement-titre">{accompagnement.titre}</h2>
+        <p class="accompagnement-texte">{accompagnement.texte}</p>
+      </div>
+      <div class="accompagnement-grille">
+        {accompagnement.etapes.map((etape) => (
+          <div class="etape">
+            <div class="etape-numero">{etape.numero}</div>
+            <h3 class="etape-titre">{etape.titre}</h3>
+            <p class="etape-texte">{etape.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-carte">
+      <div class="cta-sparkle-1">
+        <Sparkle size={34} color="#1B1A17" />
+      </div>
+      <div class="cta-sparkle-2">
+        <Sparkle size={34} color="#1B1A17" />
+      </div>
+      <h2 class="cta-titre">{cta.titre}</h2>
+      <p class="cta-texte">{cta.texte}</p>
+      <div class="cta-bouton-wrap">
+        <a href={cta.bouton.href} class="dc-btn dc-btn-dark cta-bouton" set:html={cta.bouton.label} />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===================== HERO ===================== */
+  .hero {
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 56px) clamp(48px, 6vw, 84px);
+    background: var(--creme);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--encre-08);
+  }
+  .hero-grille {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(28px, 5vw, 60px);
+    align-items: center;
+  }
+  .hero-logo-wrap {
+    width: min(450px, 100%);
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+  .hero-kicker {
+    font-family: var(--manuscrit);
+    font-size: 34px;
+    color: var(--or-fonce);
+    transform: rotate(-1deg);
+    line-height: 1;
+  }
+  .hero-titre {
+    margin: 6px 0 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 104px);
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    color: var(--encre);
+  }
+  .hero-texte {
+    margin: 18px 0 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--texte);
+    max-width: 46ch;
+  }
+  .hero-cta {
+    display: inline-block;
+    margin-top: 26px;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+
+  @media (max-width: 860px) {
+    .hero-grille {
+      grid-template-columns: 1fr;
+    }
+    .hero-titre {
+      font-size: 72px;
+    }
+  }
+
+  /* ===================== POUR QUI ===================== */
+  .pour-qui {
+    padding: clamp(48px, 6vw, 90px) clamp(20px, 5vw, 56px);
+    background: var(--blanc);
+    border-bottom: 1px solid var(--encre-08);
+  }
+  .pour-qui-conteneur {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .pour-qui-entete {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .pour-qui-kicker {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 15px;
+    color: var(--or);
+  }
+  .pour-qui-titre {
+    margin: 10px 0 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1;
+  }
+  .pour-qui-grille {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 44px;
+  }
+  .carte {
+    background: var(--creme);
+    border: 2.5px solid var(--encre);
+    padding: 32px 28px;
+  }
+  .carte-icone {
+    margin-bottom: 14px;
+  }
+  .carte-titre {
+    margin: 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 1;
+  }
+  .carte-texte {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--texte);
+  }
+
+  @media (max-width: 860px) {
+    .pour-qui-grille {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===================== ACCOMPAGNEMENT ===================== */
+  .accompagnement {
+    padding: clamp(48px, 6vw, 96px) clamp(20px, 5vw, 56px);
+    background: var(--encre);
+    color: var(--creme);
+    position: relative;
+    overflow: hidden;
+  }
+  .accompagnement-sparkle {
+    position: absolute;
+    top: -30px;
+    right: 5%;
+    --r: 8deg;
+    animation: floaty 7s ease-in-out infinite;
+  }
+  .accompagnement-conteneur {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .accompagnement-intro {
+    max-width: 640px;
+  }
+  .accompagnement-kicker {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 15px;
+    color: var(--or-clair);
+  }
+  .accompagnement-titre {
+    margin: 10px 0 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1;
+    color: var(--or-clair);
+  }
+  .accompagnement-texte {
+    margin: 14px 0 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--creme-78);
+  }
+  .accompagnement-grille {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 40px;
+  }
+  .etape {
+    border: 1.5px solid var(--or-40);
+    border-radius: 18px;
+    padding: 26px 24px;
+    background: var(--or-06);
+  }
+  .etape-numero {
+    font-family: var(--display);
+    font-size: 40px;
+    color: var(--or-clair);
+    line-height: 1;
+  }
+  .etape-titre {
+    margin: 10px 0 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--or-clair);
+  }
+  .etape-texte {
+    margin: 8px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    /* aucun token ne couvre rgba(251,246,233,.74) — tokens.css n'a que .72 et .78 */
+    color: rgba(251, 246, 233, 0.74);
+  }
+
+  @media (max-width: 860px) {
+    .accompagnement-grille {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===================== CTA BAND ===================== */
+  .cta {
+    padding: clamp(44px, 5vw, 80px) clamp(20px, 5vw, 56px);
+    background: var(--creme);
+  }
+  .cta-carte {
+    max-width: 1100px;
+    margin: 0 auto;
+    /* deuxième teinte du dégradé absente de tokens.css — la plus proche (--or-sombre) diffère (#C49C22) */
+    background: linear-gradient(150deg, var(--or-doux), #c09a20);
+    border-radius: 40px;
+    padding: clamp(34px, 5vw, 60px);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cta-sparkle-1 {
+    position: absolute;
+    top: 18px;
+    left: 30px;
+    --r: -8deg;
+    animation: floaty 6s ease-in-out infinite;
+  }
+  .cta-sparkle-2 {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    --r: 8deg;
+    animation: floaty 7s ease-in-out infinite 0.5s;
+  }
+  .cta-titre {
+    margin: 0;
+    font-family: var(--manuscrit);
+    font-size: clamp(40px, 5.5vw, 64px);
+    line-height: 1;
+    color: var(--encre);
+  }
+  .cta-texte {
+    margin: 12px auto 0;
+    max-width: 42ch;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--texte-or);
+  }
+  .cta-bouton-wrap {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .cta-bouton {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+</style>
