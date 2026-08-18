@@ -1,0 +1,54 @@
+{
+  "seo": {
+    "titre": "La ZD'thèque — Sessions gratuites zéro déchet | Les Daronnes en Nord",
+    "description": "Sessions gratuites d'entraide zéro déchet et cosmétiques maison dans la métropole lilloise. Réservez votre créneau : Villeneuve-d'Ascq, Lille, Roubaix, Lys-lez-Lannoy."
+  },
+  "hero": {
+    "kicker": "Le meilleur déchet est celui que l'on ne produit pas.",
+    "titre": "La ZD'thèque",
+    "cercleLabel": "La ZD'thèque",
+    "texte": "Bienvenue dans notre ZD'thèque dédiée au mode de vie « Zéro Déchet ». Que vous soyez déjà adepte du bocal en verre ou que vous vous demandiez par où commencer, <strong>notre association vous accompagne</strong> — sans jugement, à votre rythme.",
+    "ctaLabel": "Réserver mon créneau&nbsp;!"
+  },
+  "propositions": {
+    "kicker": "Ce que nous proposons",
+    "titre": "Apprendre, partager, agir",
+    "texte": "Le passage à l'action n'est pas une contrainte, mais une occasion de mieux consommer, de faire des économies et de redécouvrir le plaisir du « faire soi-même ».",
+    "cartes": [
+      { "icone": "cosmetique", "titre": "Apprendre", "texte": "Des ateliers pratiques pour fabriquer vos produits du quotidien." },
+      { "icone": "spray", "titre": "Partager", "texte": "Des moments d'échange pour diffuser les bonnes astuces et adresses locales." },
+      { "icone": "recyclage", "titre": "Agir", "texte": "Des opérations concrètes pour préserver notre environnement proche." }
+    ]
+  },
+  "sessions": {
+    "kicker": "Retrouvez-nous et inscrivez-vous !",
+    "titre": "Prochaines sessions",
+    "texte": "On se rencontre le <strong>mercredi à partir de 14h</strong> dans divers lieux de la métropole lilloise. Les ateliers sont <strong>entièrement gratuits</strong> : réservez votre créneau et venez découvrir astuces et recettes — produits ménagers, craies, cosmétiques home made…",
+    "horaire": "Mercredi, à partir de 14h.",
+    "labelReservation": "Réserver ma place",
+    "carteFinale": {
+      "surtitre": "Et vous&nbsp;?",
+      "titre": "Réserver mon créneau",
+      "texte": "Retrouvez toutes nos prochaines dates et réservez votre place directement en ligne.",
+      "bouton": "Réserver en ligne"
+    }
+  },
+  "ateliers": {
+    "titre": "Prendre soin de vous, au naturel",
+    "texte": "On touche les matières, on formule, on manipule, on rit. Voici ce qu'on fabrique ensemble pendant nos rendez-vous.",
+    "cartes": [
+      { "icone": "cosmetique", "titre": "Cosmétiques fait maison", "texte": "Des soins sains, sur-mesure et économiques." },
+      { "icone": "spray", "titre": "Produits ménagers", "texte": "Lessive, spray multi-usage : une maison propre sans plastique ni toxiques." },
+      { "icone": "craie", "titre": "Loisirs créatifs DIY", "texte": "Des recettes ludiques à refaire en famille, petits et grands." },
+      { "icone": "recyclage", "titre": "Upcycling & récup'", "texte": "Donner une seconde vie aux objets et prendre soin de ce qu'on a déjà." }
+    ]
+  },
+  "cta": {
+    "titre": "Une place vous attend",
+    "texte": "Réservez votre créneau gratuit, venez les mains vides et repartez avec vos premières recettes.",
+    "boutons": [
+      { "label": "Voir les prochaines sessions", "href": "#sessions", "style": "or-vif" },
+      { "label": "Retour à l'accueil", "href": "/", "style": "fantome" }
+    ]
+  }
+}
