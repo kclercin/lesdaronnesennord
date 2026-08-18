@@ -1197,6 +1197,56 @@ git commit -m "feat: layout, header (burger vanilla) et footer en Astro"
 
 ---
 
+## ⚠️ Correction d'architecture (relevée à l'exécution de la tâche 5)
+
+Le plan prévoyait une collection Astro `pages` avec un schéma dispatché par page :
+`schema: ({ id }) => (id === 'le-lab' ? leLab : …)`.
+
+**Cela ne fonctionne pas.** Dans Astro 7.2.2, `SchemaContext` vaut `{ image: ImageFunction }` —
+il n'y a **jamais** de `id`. Le paramètre déstructuré valait donc toujours `undefined`, la branche
+stricte n'était jamais choisie, et la validation retombait sur `.passthrough()` **sans aucune
+erreur ni avertissement**. Un contenu invalide serait parti en production.
+
+**Architecture retenue à la place :**
+
+| Type de contenu | Mécanisme | Fichiers |
+|---|---|---|
+| Réglages globaux | import + `schema.parse()` | `src/lib/site.ts` |
+| **Pages (5 singletons)** | **import + `schema.parse()`** | **`src/lib/pages/<page>.ts`** |
+| Briques de schéma partagées | — | `src/lib/schemas.ts` (`seo`, `lien`, `bouton`, `icone`, `carteIcone`) |
+| Ateliers, sessions (répétables) | collection Astro `glob()` | `src/content.config.ts` (tâches 7 et 8) |
+
+Les pages sont des singletons — une entrée chacune — et c'est aussi ainsi que Sveltia CMS les
+traitera (`singletons:`, pas `collections:`). Les collections Astro restent le bon outil pour les
+ateliers et les sessions, qui sont de vrais ensembles répétables.
+
+**Chaque tâche de page suivante doit donc créer `src/lib/pages/<page>.ts`** sur ce modèle :
+
+```typescript
+// src/lib/pages/le-lab.ts
+import { z } from 'astro/zod'
+import donnees from '../../content/pages/le-lab.json'
+import { carteIcone, lien, seo } from '../schemas'
+
+const schema = z.object({ seo, hero: z.object({ /* … */ }) /* … */ })
+
+export const leLab = schema.parse(donnees)
+```
+
+et l'importer dans le template :
+
+```astro
+---
+import { leLab } from '../lib/pages/le-lab'
+const { seo, hero, pourQui, accompagnement, cta } = leLab
+---
+```
+
+Vérifié : un champ vide, une icône inconnue ou une section manquante font échouer `npm run build`
+avec un **code de sortie 1** et un message Zod pointant le champ fautif.
+
+---
+
 ## Task 5: Page Le LAB (page pilote)
 
 Page la plus simple : 121 lignes, 36 valeurs numériques, aucune interactivité. Elle sert à
