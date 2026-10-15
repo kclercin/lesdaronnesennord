@@ -1,0 +1,329 @@
+---
+// src/components/sections/CarteAtelier.astro
+import type { CollectionEntry } from 'astro:content'
+import Sparkle from '../icons/Sparkle.astro'
+
+interface Props {
+  atelier: CollectionEntry<'ateliers'>
+  reservationHref: string
+  labelDeroule: string
+  labelDerouleOuvert: string
+  titreDeroule: string
+  titreRepartez: string
+  labelReservation: string
+}
+
+const {
+  atelier,
+  reservationHref,
+  labelDeroule,
+  labelDerouleOuvert,
+  titreDeroule,
+  titreRepartez,
+  labelReservation,
+} = Astro.props
+
+const { numero, titre, description, image, imageAlt, cotePhoto, tags, repartezAvec, deroule } = atelier.data
+
+/** Déduit du nombre d'étapes : 3 étapes → 3 colonnes, sinon 2 (remplace `derouleCols`). */
+const colonnes = deroule.length === 3 ? 3 : 2
+---
+
+<article class="fiche">
+  <div class="fiche-grille" data-cote={cotePhoto}>
+    <div class="fiche-media">
+      <img src={image} alt={imageAlt} class="fiche-img" />
+    </div>
+    <div class="fiche-texte">
+      <div class="fiche-numero">{numero}</div>
+      <h3 class="fiche-titre">{titre}</h3>
+      <p class="fiche-desc">{description}</p>
+
+      <div class="fiche-tags">
+        {tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+
+      <div class="fiche-repartez">
+        <div class="fiche-repartez-titre">{titreRepartez}</div>
+        <ul class="fiche-repartez-liste">
+          {repartezAvec.map((item) => (
+            <li>
+              <span class="fiche-repartez-icone"><Sparkle size={15} color="#C9A227" /></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fiche-actions">
+    <details class="fiche-deroule">
+      <summary
+        class="dc-btn dc-btn-outline dc-btn-outline-fill bascule"
+        style={`--label-ferme:"${labelDeroule}";--label-ouvert:"${labelDerouleOuvert}"`}
+      />
+      <div class="deroule-titre">{titreDeroule}</div>
+      <div class="deroule-grille" data-cols={colonnes}>
+        {deroule.map((etape) => (
+          <div class="etape">
+            <div class="etape-numero">{etape.numero}</div>
+            <div>
+              <h4 class="etape-titre">{etape.titre}</h4>
+              <p class="etape-texte">{etape.texte}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </details>
+    <a href={reservationHref} target="_blank" rel="noopener noreferrer" class="dc-btn dc-btn-dark fiche-reservation">
+      {labelReservation}
+    </a>
+  </div>
+</article>
+
+<style>
+  /* Espacement au-dessus de la fiche : 28px par défaut, 44px pour la première
+     (l'original testait a.id === 1 ; ici la structure DOM suffit). */
+  .fiche {
+    margin-top: 28px;
+    background: var(--creme);
+    border: 2.5px solid var(--encre);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+  .fiche:first-of-type {
+    margin-top: 44px;
+  }
+
+  /* ===== grille photo / texte ===== */
+  .fiche-grille {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+  }
+  .fiche-grille[data-cote='droite'] {
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .fiche-grille[data-cote='droite'] .fiche-media {
+    order: 2;
+  }
+  .fiche-grille[data-cote='droite'] .fiche-texte {
+    order: 1;
+  }
+
+  /* Sous 860px la grille passe à 1 colonne, mais l'ordre du DOM/CSS reste
+     inchangé : pour "droite" le texte (order:1) doit rester au-dessus de la
+     photo (order:2), exactement comme dans l'original où le JSX plaçait
+     textCol avant Media pour imageSide "right". Ne pas réinitialiser order ici. */
+  @media (max-width: 860px) {
+    .fiche-grille,
+    .fiche-grille[data-cote='droite'] {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* rc-atelier-media : base 280px, 240px sous 860px */
+  .fiche-media {
+    position: relative;
+    min-height: 280px;
+  }
+  .fiche-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .fiche-media {
+      min-height: 240px;
+    }
+  }
+
+  /* ===== colonne texte ===== */
+  .fiche-texte {
+    padding: clamp(26px, 3vw, 40px);
+  }
+  .fiche-numero {
+    font-family: var(--manuscrit);
+    font-size: 28px;
+    color: var(--or-fonce);
+    line-height: 1;
+    transform: rotate(-1deg);
+  }
+  .fiche-titre {
+    margin: 8px 0 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+  }
+  .fiche-desc {
+    margin: 14px 0 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--texte);
+  }
+
+  .fiche-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .tag {
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--blanc);
+    color: var(--encre);
+    border: 1.5px solid var(--encre);
+    padding: 6px 14px;
+    border-radius: 30px;
+  }
+  .tag:first-child {
+    background: var(--encre);
+    color: var(--or-clair);
+    border: none;
+  }
+
+  .fiche-repartez {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--encre-14);
+  }
+  .fiche-repartez-titre {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: var(--or);
+    margin-bottom: 10px;
+  }
+  .fiche-repartez-liste {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fiche-repartez-liste li {
+    display: flex;
+    gap: 10px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--texte);
+  }
+  .fiche-repartez-icone {
+    flex: none;
+  }
+
+  /* ===== bas de fiche : déroulé + réservation ===== */
+  /* Traduction littérale de l'original "flex gap-4" (Tailwind, retiré à la
+     tâche 2) : display:flex + gap:16px, SANS flex-wrap. Fermé, les deux
+     boutons se partagent donc la ligne unique et se compriment (flex-shrink
+     par défaut) plutôt que de s'empiler. */
+  .fiche-actions {
+    display: flex;
+    gap: 16px;
+    padding: clamp(16px, 1.8vw, 22px) clamp(26px, 3vw, 40px);
+    border-top: 2.5px solid var(--encre);
+    background: var(--blanc);
+  }
+  /* Ouvert, le contenu du déroulé est bien plus large qu'un bouton : on
+     autorise le retour à la ligne et on force le déroulé sur toute la
+     largeur pour ne pas écraser le lien de réservation à côté de lui. */
+  .fiche-actions:has(details[open]) {
+    flex-wrap: wrap;
+  }
+  .fiche-actions:has(details[open]) .fiche-deroule {
+    flex-basis: 100%;
+  }
+
+  /* bascule du libellé sans JavaScript : le contenu vient du CMS via des
+     variables CSS posées en style inline sur le <summary>. */
+  .bascule {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+    padding: 12px 22px;
+    list-style: none;
+    cursor: pointer;
+    /* L'original était un <button>, que la feuille de style du navigateur centre
+       par défaut (text-align: center). Un <summary> n'hérite pas de ce défaut :
+       sans cette ligne, le libellé se cale à gauche. */
+    text-align: center;
+  }
+  .bascule::-webkit-details-marker {
+    display: none;
+  }
+  .bascule::after {
+    content: var(--label-ferme);
+  }
+  details[open] > .bascule::after {
+    content: var(--label-ouvert);
+  }
+
+  .deroule-titre {
+    margin: 26px 0 22px;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .deroule-grille {
+    display: grid;
+    gap: 22px;
+  }
+  .deroule-grille[data-cols='2'] {
+    grid-template-columns: 1fr 1fr;
+  }
+  .deroule-grille[data-cols='3'] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 860px) {
+    .deroule-grille[data-cols='2'],
+    .deroule-grille[data-cols='3'] {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .etape {
+    display: flex;
+    gap: 16px;
+  }
+  .etape-numero {
+    font-family: var(--display);
+    font-size: 34px;
+    color: var(--or);
+    line-height: 0.9;
+    flex: none;
+  }
+  .etape-titre {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .etape-texte {
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--texte);
+  }
+
+  .fiche-reservation {
+    display: inline-block;
+    font-size: 15px;
+    padding: 13px 26px;
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+// src/components/icons/Bottles.astro
+import { s } from './_stroke'
+
+interface Props {
+  scale?: number
+}
+const { scale = 1 } = Astro.props
+---
+
+<svg width={340 * scale} height={300 * scale} viewBox="0 0 340 300" aria-hidden="true">
+  <rect x={30} y={108} width={92} height={156} rx={22} {...s(7)} />
+  <rect x={62} y={80} width={30} height={30} {...s(7)} />
+  <rect x={54} y={54} width={46} height={26} rx={6} {...s(7)} />
+  <path d="M54 62 H30 v14" {...s(7)} />
+  <rect x={132} y={150} width={66} height={114} rx={26} {...s(7)} />
+  <rect x={150} y={126} width={30} height={26} rx={5} {...s(7)} />
+  <rect x={196} y={196} width={120} height={68} rx={16} {...s(7)} />
+  <rect x={192} y={176} width={128} height={26} rx={8} {...s(7)} />
+</svg>

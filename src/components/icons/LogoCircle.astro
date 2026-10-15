@@ -1,0 +1,40 @@
+---
+// src/components/icons/LogoCircle.astro
+import { s, INK } from './_stroke'
+
+interface Props {
+  label: string
+  fontSize: number
+  color?: string
+}
+const { label, fontSize, color = INK } = Astro.props
+
+const lignes = label.split('\n')
+const hauteurLigne = fontSize * 1.02
+const debutY = 118 - ((lignes.length - 1) * hauteurLigne) / 2
+---
+
+<svg viewBox="0 0 220 220" width="100%" height="100%" role="img" aria-label={label}>
+  <path
+    d="M110 18 C168 16 206 58 204 110 C206 164 162 206 110 204 C56 206 14 162 16 110 C14 58 54 20 110 18 Z"
+    {...s(2.4, color)}
+  />
+  <path
+    d="M110 28 C160 27 196 62 194 110 C196 156 158 196 110 194 C62 196 24 156 26 110 C24 64 62 29 110 28 Z"
+    {...s(1.4, color)}
+  />
+  <circle cx="110" cy="17" r="2.4" fill={color} />
+  <circle cx="110" cy="203" r="2.4" fill={color} />
+  <text
+    x="110"
+    y={debutY}
+    text-anchor="middle"
+    font-family="'Caveat', cursive"
+    font-weight="700"
+    font-size={fontSize}
+    fill={color}
+    letter-spacing="1px"
+  >
+    {lignes.map((ligne, i) => <tspan x="110" dy={i === 0 ? 0 : hauteurLigne}>{ligne}</tspan>)}
+  </text>
+</svg>

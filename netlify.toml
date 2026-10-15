@@ -1,9 +1,11 @@
 [build]
   command = "npm run build"
-  publish = "public"
+  publish = "dist"
 
-# Redirection canonique : www -> apex (Netlify la fait aussi automatiquement
-# via le "primary domain", ces règles servent de garantie explicite)
+[build.environment]
+  NODE_VERSION = "22"
+
+# Redirection canonique : www -> apex
 [[redirects]]
   from = "https://www.lesdaronnesennord.fr/*"
   to = "https://lesdaronnesennord.fr/:splat"

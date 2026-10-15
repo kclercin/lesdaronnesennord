@@ -1,0 +1,27 @@
+---
+/**
+ * Point d'entrée de Sveltia CMS.
+ *
+ * C'est une page Astro et non un fichier `public/admin/index.html` : en mode dev,
+ * Astro ne résout pas les `index.html` de `public/` pour les URL de dossier, donc
+ * `/admin/` renvoyait 404 alors que `/admin/index.html` fonctionnait. En page Astro,
+ * la route `/admin/` est servie normalement en dev comme en production.
+ *
+ * La configuration reste dans `public/admin/config.yml` : Sveltia la charge par
+ * requête HTTP, elle doit rester un fichier statique servi tel quel.
+ */
+const VERSION = '0.193.0'
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Administration — Les Daronnes en Nord</title>
+  </head>
+  <body>
+    <script is:inline src={`https://unpkg.com/@sveltia/cms@${VERSION}/dist/sveltia-cms.js`}></script>
+  </body>
+</html>

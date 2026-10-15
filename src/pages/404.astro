@@ -1,0 +1,93 @@
+---
+import Layout from '../components/Layout.astro'
+import Sparkle from '../components/icons/Sparkle.astro'
+---
+
+<Layout titre="Page introuvable — Les Daronnes en Nord" active="">
+  <section class="hero">
+    <div class="hero-halo"></div>
+    <div class="hero-inner">
+      <div class="hero-kicker">
+        <Sparkle size={26} color="#E8BE36" />
+        Oups, page introuvable
+      </div>
+      <h1 class="hero-titre">404</h1>
+      <p class="hero-texte">
+        Cette page a filé comme un savon mouillé. Revenons à l'essentiel : nos ateliers, nos recettes et nos
+        rendez-vous.
+      </p>
+      <div class="hero-boutons">
+        <a href="/" class="dc-btn dc-btn-dark hero-bouton">Retour à l'accueil</a>
+        <a href="/la-zd-theque#sessions" class="dc-btn dc-btn-outline dc-btn-outline-gold hero-bouton-outline">
+          Voir les sessions
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: clamp(56px, 9vw, 120px) clamp(20px, 5vw, 56px);
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-halo {
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    transform: translateX(-50%);
+    width: min(520px, 70vw);
+    height: min(520px, 70vw);
+    background: radial-gradient(circle, rgba(214, 178, 52, 0.32), rgba(214, 178, 52, 0) 70%);
+    z-index: 0;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--manuscrit);
+    font-size: 32px;
+    color: var(--or-fonce);
+    transform: rotate(-2deg);
+  }
+  .hero-titre {
+    margin: 10px 0 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(64px, 14vw, 140px);
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    color: var(--encre);
+  }
+  .hero-texte {
+    margin: 16px auto 0;
+    max-width: 40ch;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--texte);
+  }
+  .hero-boutons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .hero-bouton {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+  .hero-bouton-outline {
+    font-size: 16px;
+    padding: 14px 30px;
+  }
+</style>

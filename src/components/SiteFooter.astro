@@ -1,0 +1,123 @@
+---
+// src/components/SiteFooter.astro
+import Logo from './icons/Logo.astro'
+import { site } from '../lib/site'
+
+const annee = new Date().getFullYear()
+
+const NAVIGATION = [
+  { label: 'Bonjour', href: '/#bonjour' },
+  { label: 'Nos engagements', href: '/#engagements' },
+  { label: "La ZD'thèque", href: '/la-zd-theque' },
+  { label: 'Le LAB', href: '/le-lab' },
+  { label: 'Nos ateliers', href: '/nos-ateliers' },
+  { label: 'À propos', href: '/#apropos' },
+]
+---
+
+<footer class="pied">
+  <div class="haut">
+    <div>
+      <span class="cartouche"><Logo height={92} /></span>
+      <p class="baseline">{site.baseline}</p>
+    </div>
+
+    <div class="colonnes">
+      <div>
+        <div class="titre-col">Navigation</div>
+        {NAVIGATION.map((l) => <a href={l.href} class="lien">{l.label}</a>)}
+      </div>
+      <div>
+        <div class="titre-col">Contact</div>
+        <a href="/contact" class="lien">Contact</a>
+        <span class="zone">{site.zone}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bas">
+    <span>© {annee} Les Daronnes en Nord — {site.mentionLegale}</span>
+    <span>{site.mentionSmd}</span>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    background: var(--encre);
+    color: var(--creme);
+    padding: clamp(40px, 5vw, 64px) clamp(20px, 5vw, 56px) 32px;
+  }
+
+  .haut {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .cartouche {
+    display: inline-block;
+    background: var(--creme);
+    padding: 14px 20px;
+    border-radius: 20px;
+  }
+
+  .baseline {
+    margin-top: 16px;
+    max-width: 38ch;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--creme-66);
+  }
+
+  .colonnes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .titre-col {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    color: var(--or-clair);
+    margin-bottom: 12px;
+  }
+
+  .lien {
+    display: block;
+    text-decoration: none;
+    color: var(--creme-80);
+    font-size: 15px;
+    padding: 5px 0;
+  }
+
+  .zone {
+    display: block;
+    color: var(--creme-50);
+    font-size: 13px;
+    padding-top: 8px;
+  }
+
+  .bas {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(251, 246, 233, 0.14);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--creme-50);
+  }
+
+  @media (max-width: 860px) {
+    .haut {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

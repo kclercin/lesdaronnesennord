@@ -1,0 +1,21 @@
+{
+  "ordre": 2,
+  "numero": "Atelier nº 2",
+  "titre": "Réalisez votre duo de rouges à lèvres",
+  "description": "Révélez votre beauté au naturel en compagnie d'Audrey, créatrice de cosmétiques naturels. Plongez dans l'univers fascinant de la fabrication de cosmétiques et créez vos propres rouges à lèvres.",
+  "image": "/uploads/atelier-rouges-a-levres.webp",
+  "imageAlt": "Duo de rouges à lèvres naturels en étui bambou",
+  "cotePhoto": "droite",
+  "tags": ["2 h", "Dès 15 ans", "1 à 6 participants", "Jusqu'à 20 en privatisation"],
+  "repartezAvec": [
+    "2 h de découverte avec Audrey pour réaliser deux rouges à lèvres",
+    "Des connaissances en fabrication de cosmétiques",
+    "Votre duo de rouges à lèvres (version vegan possible)"
+  ],
+  "deroule": [
+    { "numero": "01", "titre": "Accueil & introduction", "texte": "Audrey vous présente le rôle, les propriétés et les vertus de chaque ingrédient, et comment chaque matière contribue à la texture et à la couleur." },
+    { "numero": "02", "titre": "Choix des teintes & fabrication", "texte": "Sélectionnez vos teintes parmi une large gamme, puis fabriquez votre duo de rouges à lèvres — en version vegan si vous le souhaitez." },
+    { "numero": "03", "titre": "Accompagnement & astuces", "texte": "Audrey partage ses astuces, ses bons plans et ses conseils pour un mode de vie plus respectueux de vous-même et de votre environnement." },
+    { "numero": "04", "titre": "Moment de partage", "texte": "Partagez votre expérience autour d'un verre, puis repartez avec vos jolis rouges à lèvres prêts à rejoindre votre routine beauté." }
+  ]
+}

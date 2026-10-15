@@ -1,0 +1,602 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../components/Layout.astro'
+import LogoCircle from '../components/icons/LogoCircle.astro'
+import Sparkle from '../components/icons/Sparkle.astro'
+import { ICONES } from '../components/icons'
+import { CLASSES_BOUTON } from '../lib/boutons'
+import { site } from '../lib/site'
+import { laZdTheque } from '../lib/pages/la-zd-theque'
+
+const { seo, hero, propositions, sessions, ateliers, cta } = laZdTheque
+
+const RAYONS = [
+  '240px 18px 220px 18px / 18px 220px 18px 240px',
+  '18px 220px 18px 240px / 240px 18px 220px 18px',
+  '220px 18px 240px 18px / 18px 240px 18px 220px',
+]
+
+const listeSessions = (await getCollection('sessions')).sort((a, b) => a.data.ordre - b.data.ordre)
+---
+
+<Layout titre={seo.titre} description={seo.description} active="zdtheque">
+  <section id="zdtheque" class="hero">
+    <div class="hero-grille">
+      <div class="hero-logo-wrap">
+        <LogoCircle label={hero.cercleLabel} fontSize={26} color="#1B1A17" />
+      </div>
+      <div>
+        <div class="hero-kicker">{hero.kicker}</div>
+        <h1 class="hero-titre">{hero.titre}</h1>
+        <p class="hero-texte" set:html={hero.texte} />
+        <a
+          href={site.reservationZdtheque}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="dc-btn dc-btn-dark hero-cta"
+          set:html={hero.ctaLabel}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="propositions">
+    <div class="propositions-conteneur">
+      <div class="propositions-entete">
+        <div class="propositions-kicker">{propositions.kicker}</div>
+        <h2 class="propositions-titre">{propositions.titre}</h2>
+        <p class="propositions-texte">{propositions.texte}</p>
+      </div>
+      <div class="propositions-grille">
+        {propositions.cartes.map((carte, i) => {
+          const Icone = ICONES[carte.icone]
+          return (
+            <article class="carte" style={`border-radius:${RAYONS[i]}`}>
+              <div class="carte-icone"><Icone /></div>
+              <h3 class="carte-titre">{carte.titre}</h3>
+              <p class="carte-texte">{carte.texte}</p>
+            </article>
+          )
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section id="sessions" class="sessions">
+    <div class="sessions-conteneur">
+      <div class="sessions-entete">
+        <div>
+          <div class="sessions-kicker">{sessions.kicker}</div>
+          <h2 class="sessions-titre">{sessions.titre}</h2>
+        </div>
+        <p class="sessions-texte" set:html={sessions.texte} />
+      </div>
+
+      <div class="rail" id="rail">
+        {listeSessions.map((session) => {
+          const href = session.data.lienReservation ?? site.reservationZdtheque
+          return (
+            <article data-carte class="carte-session">
+              <div class="carte-session-entete">
+                <span class="carte-session-jour">{session.data.jour}</span>
+                <span class="carte-session-mois">{session.data.mois}</span>
+              </div>
+              <div class="carte-session-corps">
+                <h3 class="carte-session-lieu">{session.data.lieu}</h3>
+                <p class="carte-session-ville">{session.data.ville}</p>
+                <p class="carte-session-horaire">{sessions.horaire}</p>
+                <a href={href} target="_blank" rel="noopener noreferrer" class="dc-btn dc-btn-gold carte-session-cta">
+                  {sessions.labelReservation}
+                </a>
+              </div>
+            </article>
+          )
+        })}
+        <a
+          href={site.reservationZdtheque}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-carte
+          class="dc-lift-sm carte-finale"
+        >
+          <div class="carte-finale-entete">
+            <span set:html={sessions.carteFinale.surtitre} />
+          </div>
+          <div class="carte-finale-corps">
+            <div class="carte-finale-icone">
+              <Sparkle size={34} color="#1B1A17" />
+            </div>
+            <h3 class="carte-finale-titre">{sessions.carteFinale.titre}</h3>
+            <p class="carte-finale-texte">{sessions.carteFinale.texte}</p>
+            <span class="carte-finale-bouton">{sessions.carteFinale.bouton}</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="fleches">
+        <button type="button" aria-label="Sessions précédentes" data-sens="-1" class="dc-arrow dc-arrow-light">←</button>
+        <button type="button" aria-label="Sessions suivantes" data-sens="1" class="dc-arrow dc-arrow-dark">→</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="ateliers" class="ateliers">
+    <div class="ateliers-conteneur">
+      <div class="ateliers-entete">
+        <h2 class="ateliers-titre">{ateliers.titre}</h2>
+        <p class="ateliers-texte">{ateliers.texte}</p>
+      </div>
+      <div class="ateliers-grille">
+        {ateliers.cartes.map((carte) => {
+          const Icone = ICONES[carte.icone]
+          return (
+            <article class="carte-atelier">
+              <div class="carte-atelier-icone"><Icone /></div>
+              <h3 class="carte-atelier-titre">{carte.titre}</h3>
+              <p class="carte-atelier-texte">{carte.texte}</p>
+            </article>
+          )
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-carte">
+      <h2 class="cta-titre">{cta.titre}</h2>
+      <p class="cta-texte">{cta.texte}</p>
+      <div class="cta-boutons">
+        {cta.boutons.map((b) => (
+          <a href={b.href} class={`cta-bouton ${CLASSES_BOUTON[b.style]}`} set:html={b.label} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const rail = document.querySelector<HTMLElement>('#rail')!
+
+  document.querySelectorAll<HTMLButtonElement>('[data-sens]').forEach((bouton) => {
+    bouton.addEventListener('click', () => {
+      const carte = rail.querySelector<HTMLElement>('[data-carte]')
+      const pas = carte ? carte.offsetWidth + 22 : 340
+      rail.scrollBy({ left: Number(bouton.dataset.sens) * pas, behavior: 'smooth' })
+    })
+  })
+</script>
+
+<style>
+  /* ===================== HERO ===================== */
+  .hero {
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 56px) clamp(48px, 6vw, 84px);
+    background: var(--creme);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--encre-08);
+  }
+  .hero-grille {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(28px, 5vw, 60px);
+    align-items: center;
+  }
+  .hero-logo-wrap {
+    width: min(450px, 100%);
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+  .hero-kicker {
+    font-family: var(--manuscrit);
+    font-size: 34px;
+    color: var(--or-fonce);
+    transform: rotate(-1deg);
+    line-height: 1;
+  }
+  .hero-titre {
+    margin: 6px 0 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 92px);
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    color: var(--encre);
+  }
+  .hero-texte {
+    margin: 18px 0 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--texte);
+    max-width: 46ch;
+  }
+  .hero-cta {
+    display: inline-block;
+    margin-top: 26px;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+
+  @media (max-width: 860px) {
+    .hero-grille {
+      grid-template-columns: 1fr;
+    }
+    .hero-titre {
+      font-size: 64px;
+    }
+  }
+
+  /* ===================== CE QUE NOUS PROPOSONS ===================== */
+  .propositions {
+    padding: clamp(48px, 6vw, 90px) clamp(20px, 5vw, 56px);
+    background: var(--blanc);
+    border-bottom: 1px solid var(--encre-08);
+  }
+  .propositions-conteneur {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .propositions-entete {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .propositions-kicker {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 15px;
+    color: var(--or);
+  }
+  .propositions-titre {
+    margin: 10px 0 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1;
+  }
+  .propositions-texte {
+    margin: 14px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--texte-doux);
+    max-width: 50ch;
+  }
+  .propositions-grille {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 44px;
+  }
+  .carte {
+    background: var(--creme);
+    border: 2.5px solid var(--encre);
+    padding: 32px 28px;
+  }
+  .carte-icone {
+    margin-bottom: 14px;
+  }
+  .carte-titre {
+    margin: 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 1;
+  }
+  .carte-texte {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--texte);
+  }
+
+  @media (max-width: 860px) {
+    .propositions-grille {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===================== SESSIONS ===================== */
+  .sessions {
+    padding: clamp(48px, 6vw, 90px) clamp(20px, 5vw, 56px);
+    background: var(--blanc);
+    border-bottom: 1px solid var(--encre-08);
+  }
+  .sessions-conteneur {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .sessions-entete {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 5vw, 56px);
+    align-items: end;
+  }
+  .sessions-kicker {
+    font-family: var(--manuscrit);
+    font-size: 38px;
+    color: var(--or-fonce);
+    transform: rotate(-2deg);
+    line-height: 1;
+  }
+  .sessions-titre {
+    margin: 8px 0 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(30px, 3.6vw, 40px);
+    line-height: 1;
+    letter-spacing: 0.5px;
+  }
+  .sessions-texte {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--texte);
+  }
+
+  @media (max-width: 860px) {
+    .sessions-entete {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .rail {
+    display: flex;
+    gap: 22px;
+    margin-top: 38px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px 4px 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .carte-session {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background: var(--blanc);
+    border: 2px solid var(--encre);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* alpha .7 sur l'encre : ni --encre-12 ni --encre-14 ne correspondent */
+    box-shadow: 0 18px 40px -30px rgba(27, 26, 23, 0.7);
+  }
+  .carte-session-entete {
+    background: var(--encre);
+    color: var(--creme);
+    padding: 18px 22px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .carte-session-jour {
+    font-family: var(--display);
+    font-size: 42px;
+    line-height: 0.9;
+    color: var(--or-clair);
+  }
+  .carte-session-mois {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+  .carte-session-corps {
+    padding: 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .carte-session-lieu {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .carte-session-ville {
+    margin: 4px 0 0;
+    font-size: 14.5px;
+    color: var(--texte-doux);
+  }
+  .carte-session-horaire {
+    margin: 14px 0 18px;
+    font-size: 14px;
+    color: var(--texte);
+  }
+  .carte-session-cta {
+    margin-top: auto;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 18px;
+    border-radius: 40px;
+  }
+
+  .carte-finale {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    text-decoration: none;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, var(--or-doux), var(--or-sombre));
+    border: 2px solid var(--encre);
+    /* alpha .7 sur l'encre : ni --encre-12 ni --encre-14 ne correspondent */
+    box-shadow: 0 18px 40px -30px rgba(27, 26, 23, 0.7);
+  }
+  .carte-finale-entete {
+    background: var(--encre);
+    color: var(--or-clair);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .carte-finale-entete span {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .carte-finale-corps {
+    padding: 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .carte-finale-icone {
+    margin-bottom: 10px;
+  }
+  .carte-finale-titre {
+    margin: 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--encre);
+  }
+  .carte-finale-texte {
+    margin: 8px 0 18px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--texte-or);
+  }
+  .carte-finale-bouton {
+    margin-top: auto;
+    text-align: center;
+    width: 100%;
+    background: var(--encre);
+    color: var(--creme);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 18px;
+    border-radius: 40px;
+  }
+
+  .fleches {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 26px;
+  }
+
+  /* ===================== LES ATELIERS ===================== */
+  .ateliers {
+    padding: clamp(48px, 6vw, 92px) clamp(20px, 5vw, 56px);
+    background: var(--blanc);
+    border-top: 1px solid var(--encre-08);
+  }
+  .ateliers-conteneur {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .ateliers-entete {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .ateliers-titre {
+    margin: 10px 0 0;
+    font-family: var(--manuscrit);
+    font-weight: 600;
+    font-size: clamp(40px, 5.2vw, 62px);
+    line-height: 1;
+  }
+  .ateliers-texte {
+    margin: 14px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--texte-doux);
+    max-width: 48ch;
+  }
+  .ateliers-grille {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 44px;
+  }
+  .carte-atelier {
+    background: var(--creme);
+    border: 2px solid var(--encre);
+    border-radius: 22px;
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .carte-atelier-icone {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .carte-atelier-titre {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .carte-atelier-texte {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--texte);
+  }
+
+  /* rc-4 : sous 860px cette grille passe à 2 colonnes, pas 1 */
+  @media (max-width: 860px) {
+    .ateliers-grille {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ===================== CTA BAND ===================== */
+  .cta {
+    padding: clamp(44px, 5vw, 80px) clamp(20px, 5vw, 56px);
+    background: var(--creme);
+  }
+  .cta-carte {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--encre);
+    color: var(--creme);
+    border-radius: 40px;
+    padding: clamp(34px, 5vw, 60px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-titre {
+    margin: 0;
+    font-family: var(--manuscrit);
+    font-size: clamp(40px, 5.5vw, 64px);
+    line-height: 1;
+    color: var(--or-clair);
+  }
+  .cta-texte {
+    margin: 12px auto 0;
+    max-width: 42ch;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--creme-78);
+  }
+  .cta-boutons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .cta-bouton {
+    font-size: 16px;
+  }
+  .cta-boutons .cta-bouton:nth-child(1) {
+    font-weight: 700;
+    padding: 15px 30px;
+  }
+  .cta-boutons .cta-bouton:nth-child(2) {
+    padding: 14px 30px;
+  }
+</style>

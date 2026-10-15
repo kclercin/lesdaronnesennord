@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "titre": "Le LAB — Accompagnement des artisans & créateurs | Les Daronnes en Nord",
+    "description": "Le LAB accompagne artisans, créateurs et porteurs de projet pour concevoir, structurer et animer leurs propres ateliers au naturel dans la métropole lilloise."
+  },
+  "hero": {
+    "kicker": "Incubateur de partage pour artisans & créateurs",
+    "titre": "Le LAB",
+    "cercleLabel": "Le LAB",
+    "texte": "Vous êtes artisan, créateur ou porteur de projet et vous souhaitez transmettre votre savoir-faire à travers des ateliers&nbsp;? <strong>Ne restez pas seul&nbsp;!</strong> Le LAB met à votre disposition un lieu et une équipe pluridisciplinaire pour concevoir, structurer et animer vos propres ateliers tout naturellement.",
+    "cta": { "label": "Travaillons ensemble&nbsp;!", "href": "/contact?sujet=lab#form" }
+  },
+  "pourQui": {
+    "kicker": "Pour qui&nbsp;?",
+    "titre": "Le LAB est fait pour vous si…",
+    "cartes": [
+      {
+        "icone": "feuille-lab",
+        "titre": "Créateurs éco-responsables",
+        "texte": "Cosmétiques, upcycling, zéro déchet : vous portez des produits ou un savoir-faire qui ont du sens."
+      },
+      {
+        "icone": "outils",
+        "titre": "Artisans en développement",
+        "texte": "Vous voulez diversifier votre activité et créer une nouvelle source de revenus grâce à la transmission."
+      },
+      {
+        "icone": "etincelle",
+        "titre": "Futurs animateurs",
+        "texte": "Vous souhaitez animer des ateliers de manière impactante et professionnelle, sans partir de zéro."
+      }
+    ]
+  },
+  "accompagnement": {
+    "kicker": "Notre accompagnement",
+    "titre": "De l'idée à l'atelier qui tourne",
+    "texte": "Une équipe pluridisciplinaire à vos côtés, étape par étape — pour que votre atelier soit clair, fluide et fidèle à vos valeurs.",
+    "etapes": [
+      { "numero": "01", "titre": "Concevoir", "texte": "On clarifie votre intention, votre public et le fil pédagogique de l'atelier." },
+      { "numero": "02", "titre": "Structurer", "texte": "Déroulé, matériel, recettes, sécurité : on pose un cadre solide et reproductible." },
+      { "numero": "03", "titre": "Animer", "texte": "On vous coache sur la posture et le rythme pour des ateliers vivants et conviviaux." }
+    ]
+  },
+  "cta": {
+    "titre": "Ne restez pas seul·e avec votre idée",
+    "texte": "Parlons de votre projet d'atelier — on vous dit en toute transparence comment Le LAB peut vous aider.",
+    "bouton": { "label": "Travaillons ensemble&nbsp;!", "href": "/contact?sujet=lab#form" }
+  }
+}
