@@ -1,0 +1,40 @@
+{
+  "ordre": 1,
+  "numero": "Atelier nº 1",
+  "titre": "Atelier Cosm'éthique",
+  "description": "Découvrez la cosmétique home made, naturelle et écoresponsable en compagnie d'Audrey, créatrice de cosmétiques naturels. Elle vous ouvre les portes de son charmant atelier, où vous concevez vos propres recettes de cosmétique",
+  "image": "/uploads/image000000.jpg (1).jpeg",
+  "imageAlt": "Atelier de fabrication de cosmétiques avec Audrey",
+  "cotePhoto": "gauche",
+  "tags": [
+    "1 h",
+    "Dès 8 ans",
+    "1 à 8 participants"
+  ],
+  "repartezAvec": [
+    "1 h de découverte avec Audrey pour réaliser 1 cosmétique",
+    "Des connaissances en fabrication de cosmétiques"
+  ],
+  "deroule": [
+    {
+      "numero": "01",
+      "titre": "Accueil & introduction",
+      "texte": "Audrey vous présente les ingrédients naturels — kératine végétale, poudres de plantes, huiles, beurres, fragrances — leurs rôles et leurs vertus."
+    },
+    {
+      "numero": "02",
+      "titre": "Choix des recettes",
+      "texte": "Sélectionnez 1 produit parmis un choix de plus de 30 recettes"
+    },
+    {
+      "numero": "03",
+      "titre": "Fabrication",
+      "texte": "Testez, mesurez, mélangez et ajustez vos ingrédients jusqu'à une recette qui vous ressemble : parfum, texture, propriétés."
+    },
+    {
+      "numero": "04",
+      "titre": "Finalisation & échanges",
+      "texte": "Recevez un livret pédagogique numérique avec les recettes, puis échangez autour d'une boisson. Repartez avec vos deux cosmétiques solides."
+    }
+  ]
+}
