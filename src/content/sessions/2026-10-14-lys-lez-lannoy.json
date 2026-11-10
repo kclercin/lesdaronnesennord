@@ -1,1 +1,8 @@
-{ "ordre": 4, "jour": "14", "mois": "Oct. 2026", "lieu": "Le LAB", "ville": "Lys-lez-Lannoy" }
+{
+  "ordre": 4,
+  "jour": "6",
+  "mois": "Janv. 2027",
+  "lieu": "Le LAB",
+  "ville": "Lys-lez-Lannoy",
+  "lienReservation": "https://booking.myrezapp.com/fr/online/booking/step1/16074/106065"
+}
