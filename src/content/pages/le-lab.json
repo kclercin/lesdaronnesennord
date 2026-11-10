@@ -1,14 +1,17 @@
 {
   "seo": {
-    "titre": "Le LAB — Accompagnement des artisans & créateurs | Les Daronnes en Nord",
-    "description": "Le LAB accompagne artisans, créateurs et porteurs de projet pour concevoir, structurer et animer leurs propres ateliers au naturel dans la métropole lilloise."
+    "titre": "Le Cosméto Lab | Les Daronnes en Nord",
+    "description": "Le Cosméto Lab un espace unique dédié à la pratique de la cosmétique Home Made. \nVous nous avez rencontré lors d'un atelier et vous souhaitez refabriquer vos produits. LeCosméto Lab met à disposition le matériel, l'expertise de notre intervenante, un accès privilégié à notre bar à potion.....rendez-vous en 2027!"
   },
   "hero": {
-    "kicker": "Incubateur de partage pour artisans & créateurs",
-    "titre": "Le LAB",
-    "cercleLabel": "Le LAB",
-    "texte": "Vous êtes artisan, créateur ou porteur de projet et vous souhaitez transmettre votre savoir-faire à travers des ateliers&nbsp;? <strong>Ne restez pas seul&nbsp;!</strong> Le LAB met à votre disposition un lieu et une équipe pluridisciplinaire pour concevoir, structurer et animer vos propres ateliers tout naturellement.",
-    "cta": { "label": "Travaillons ensemble&nbsp;!", "href": "/contact?sujet=lab#form" }
+    "kicker": "100% Moi, 100% Naturel",
+    "titre": "Le Cosméto Lab",
+    "cercleLabel": "Le Cosméto Lab",
+    "texte": "Vous avez déjà participé à l'un de nos ateliers et vous maîtrisez les bases de la formulation ? Envie de refabriquer vos produits fétiches à la maison, mais sans investir dans tout le matériel ou sans encombrer votre cuisine ? Le Cosméto Lab est fait pour vous !\n\nInspiré du principe des ateliers partagés de poterie, le Cosméto Lab est un espace entièrement dédié à la pratique de la cosmétique Home Made. Nous mettons à votre disposition un plateau technique professionnel, pensé pour vous offrir un cadre de travail idéal.",
+    "cta": {
+      "label": "Travaillons ensemble&nbsp;!",
+      "href": "/contact?sujet=lab#form"
+    }
   },
   "pourQui": {
     "kicker": "Pour qui&nbsp;?",
@@ -36,14 +39,29 @@
     "titre": "De l'idée à l'atelier qui tourne",
     "texte": "Une équipe pluridisciplinaire à vos côtés, étape par étape — pour que votre atelier soit clair, fluide et fidèle à vos valeurs.",
     "etapes": [
-      { "numero": "01", "titre": "Concevoir", "texte": "On clarifie votre intention, votre public et le fil pédagogique de l'atelier." },
-      { "numero": "02", "titre": "Structurer", "texte": "Déroulé, matériel, recettes, sécurité : on pose un cadre solide et reproductible." },
-      { "numero": "03", "titre": "Animer", "texte": "On vous coache sur la posture et le rythme pour des ateliers vivants et conviviaux." }
+      {
+        "numero": "01",
+        "titre": "Concevoir",
+        "texte": "On clarifie votre intention, votre public et le fil pédagogique de l'atelier."
+      },
+      {
+        "numero": "02",
+        "titre": "Structurer",
+        "texte": "Déroulé, matériel, recettes, sécurité : on pose un cadre solide et reproductible."
+      },
+      {
+        "numero": "03",
+        "titre": "Animer",
+        "texte": "On vous coache sur la posture et le rythme pour des ateliers vivants et conviviaux."
+      }
     ]
   },
   "cta": {
     "titre": "Ne restez pas seul·e avec votre idée",
     "texte": "Parlons de votre projet d'atelier — on vous dit en toute transparence comment Le LAB peut vous aider.",
-    "bouton": { "label": "Travaillons ensemble&nbsp;!", "href": "/contact?sujet=lab#form" }
+    "bouton": {
+      "label": "Travaillons ensemble&nbsp;!",
+      "href": "/contact?sujet=lab#form"
+    }
   }
 }
